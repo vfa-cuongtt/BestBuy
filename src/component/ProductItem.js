@@ -6,7 +6,6 @@ const {width: screenWidth} = Dimensions.get('window');
 
 export default class ProductItem extends Component {
     render() {
-        console.log('this.props.products',this.props.product)
         return (
             <View style={styles.productItem}>
                 <View style={styles.productHeader}>

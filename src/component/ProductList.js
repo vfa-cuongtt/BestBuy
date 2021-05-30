@@ -3,14 +3,33 @@ import { Text, StyleSheet, View, SafeAreaView, FlatList } from 'react-native'
 import axios from 'axios'
 import { connect } from 'react-redux'
 import ProductItem from './ProductItem'
+import CategoriesItem from './CategoriesItem';
 // import {getListItem} from './redux/actions/productAction'
 
 
 export default class ProductList extends Component {
     state = {
-        products : []
+        products : [],
+        categories: [],
     }
     componentDidMount() {
+        this.getCategories()
+        this.getProductList()    
+    }
+    getCategories() {
+        axios({
+            method: 'GET',
+            url: 'http://svcy3.myclass.vn/api/Product/getAllCategory'
+        }).then((resp) => {
+            this.setState({
+                categories: resp.data.content
+            })
+        }).catch((err) => {
+            console.log(err)
+        })
+    }
+
+    getProductList() {
         axios({
             method: 'GET',
             url: 'http://svcy3.myclass.vn/api/Product',
@@ -23,16 +42,32 @@ export default class ProductList extends Component {
         });
     }
 
+    _renderCategoriesItem=({item})=> {
+        return <CategoriesItem categories={item}/>;
+    }
     _renderItem = ({item}) => {
-        console.log('item', item)
         return <ProductItem product={item} />;
     }
 
     render() {
         return (
             <SafeAreaView style={styles.areaView}>
-                <View style={styles.container}>
-                    {/* <ProductItem products={this.state.products} /> */}
+                <View style={styles.boxSearch}>
+
+                </View>
+                <View style={styles.boxCategories}>
+                    <Text style={styles.categoriesTitle}>Categories</Text>
+                    <View style={styles.categoriesList}>
+                        <FlatList 
+                            horizontal={true}
+                            keyExtractor={(item)=> `${item.id}`}
+                            data={this.state.categories}
+                            renderItem={this._renderCategoriesItem}
+                        />
+                    </View>
+                </View>
+
+                <View style={styles.boxCategoriesList}>
                     <FlatList 
                         numColumns={2}
                         keyExtractor={(item, index) => `${item.name}_${item.index}`}
@@ -50,9 +85,29 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#dcf1f9',
     },
-    container: {
-        flex: 1,
-        
+    boxSearch:{
+        flex: 0.5,
+        backgroundColor: 'red'
+    },
+    boxCategories: {
+        flex: 0.5,
+        paddingHorizontal: 20
+    },
+    categoriesTitle: {
+        fontSize: 30,
+        fontWeight: 'bold'
+    },
+    categoriesList: {
+        paddingTop: 20,
+        flexDirection: 'row',
+    },
+    categoriesText: {
+        fontSize: 16,
+        fontWeight: '400',
+        paddingHorizontal: 10
+    },
+    boxCategoriesList: {
+        flex: 3,
         paddingHorizontal: 20
     },
     
