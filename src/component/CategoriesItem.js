@@ -10,11 +10,9 @@ export default class CategoriesItem extends Component {
     render() {
         // console.log('this.props.categories', this.props.categories)
         return (
-            
             <TouchableOpacity onPress={()=> {this.onPressCategories(this.props.categories.id)}}>
                 <Text style={styles.categoriesText}>{this.props.categories.id}</Text>
             </TouchableOpacity>
-            
         )
     }
 }
