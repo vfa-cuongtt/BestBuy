@@ -1,13 +1,20 @@
 import React, { Component } from 'react'
-import { Text, StyleSheet, View } from 'react-native'
+import { Text, StyleSheet, View, TouchableOpacity } from 'react-native'
 
 export default class CategoriesItem extends Component {
+
+    onPressCategories =(id) => {
+        console.log('onPressCategories', id)
+    }
+
     render() {
         // console.log('this.props.categories', this.props.categories)
         return (
-            <>
+            
+            <TouchableOpacity onPress={()=> {this.onPressCategories(this.props.categories.id)}}>
                 <Text style={styles.categoriesText}>{this.props.categories.id}</Text>
-            </>
+            </TouchableOpacity>
+            
         )
     }
 }
