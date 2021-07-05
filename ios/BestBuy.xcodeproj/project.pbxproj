@@ -31,6 +31,7 @@
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* BestBuyTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BestBuyTests.m; sourceTree = "<group>"; };
 		06835B9535A84708833BCFC5 /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Brands.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; };
+		0750F2DE7A0F4B2999D3E680 /* fuggles.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = fuggles.ttf; path = ../assets/fonts/fuggles.ttf; sourceTree = "<group>"; };
 		132473983C12469F9F6BBC39 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* BestBuy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BestBuy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = BestBuy/AppDelegate.h; sourceTree = "<group>"; };
@@ -141,6 +142,7 @@
 				80075C9DA1F44567A1A2C8B0 /* Octicons.ttf */,
 				6D28FF34975D4188B7ACA2EB /* SimpleLineIcons.ttf */,
 				6340E6CF3D85452E8247D0F7 /* Zocial.ttf */,
+				0750F2DE7A0F4B2999D3E680 /* fuggles.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
