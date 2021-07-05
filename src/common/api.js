@@ -1,7 +1,5 @@
-import axios from "axios";
+import axios from 'axios';
 
-class Api {
-
-}
+class Api {}
 
 export default Api;
