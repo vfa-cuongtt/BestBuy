@@ -11,6 +11,8 @@
 #import <FlipperKitNetworkPlugin/FlipperKitNetworkPlugin.h>
 #import <SKIOSNetworkPlugin/SKIOSNetworkAdapter.h>
 #import <FlipperKitReactPlugin/FlipperKitReactPlugin.h>
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <GoogleMaps/GoogleMaps.h>
 
 static void InitializeFlipper(UIApplication *application) {
   FlipperClient *client = [FlipperClient sharedClient];
@@ -27,10 +29,11 @@ static void InitializeFlipper(UIApplication *application) {
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+  
 #ifdef FB_SONARKIT_ENABLED
   InitializeFlipper(application);
 #endif
-
+  [GMSServices provideAPIKey:@"AIzaSyBv5MMwni5_TRsu2hFlKaBd2iRCKLbJ9gs"];
   RCTBridge *bridge = [[RCTBridge alloc] initWithDelegate:self launchOptions:launchOptions];
   RCTRootView *rootView = [[RCTRootView alloc] initWithBridge:bridge
                                                    moduleName:@"BestBuy"
@@ -57,6 +60,17 @@ static void InitializeFlipper(UIApplication *application) {
 #else
   return [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
 #endif
+}
+
+- (BOOL)application:(UIApplication *)app
+            openURL:(NSURL *)url
+            options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options
+{
+  if ([[FBSDKApplicationDelegate sharedInstance] application:app openURL:url options:options]) {
+    return YES;
+  }
+
+  return NO;
 }
 
 @end
