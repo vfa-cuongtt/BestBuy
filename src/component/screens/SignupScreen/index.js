@@ -1,22 +1,26 @@
 import React from 'react';
 import loginStyles from '../../style/LoginStyle';
 import {
-  Text,
   View,
   SafeAreaView,
   TextInput,
   TouchableOpacity,
+  Image,
 } from 'react-native';
 import {Formik} from 'formik';
 import * as Yup from 'yup';
 import {userSignup} from '../../api/userLoginApi';
+import {logo} from '../../../assets';
+import {Text} from '../../component';
+import {NavigationContainer} from '@react-navigation/native';
+
 const loginSchema = Yup.object().shape({
   email: Yup.string().email('Invalid email').required('Required'),
   password: Yup.string().required('Required'),
   name: Yup.string().required('Required'),
 });
 
-const SignupScreen = () => {
+const SignupScreen = ({navigation}) => {
   const handleSubmitSignup = value => {
     const data = {...value, gender: true, phone: '0910234567'};
     userSignup(data)
@@ -30,8 +34,10 @@ const SignupScreen = () => {
 
   return (
     <SafeAreaView style={loginStyles.areaView}>
+      <View style={loginStyles.logoView}>
+        <Image source={logo} style={loginStyles.logo} resizeMode="stretch" />
+      </View>
       <View style={loginStyles.loginForm}>
-        <Text>Login </Text>
         <Formik
           initialValues={{email: '', password: '', name: ''}}
           onSubmit={handleSubmitSignup}
@@ -39,10 +45,9 @@ const SignupScreen = () => {
           {({values, handleChange, handleSubmit, errors}) => (
             <>
               <View style={loginStyles.inputContainer}>
-                <Text>Name</Text>
                 <TextInput
                   style={loginStyles.textInput}
-                  placeholder="example@gmail.com"
+                  placeholder="Name"
                   value={values.name}
                   onChangeText={handleChange('name')}
                 />
@@ -51,7 +56,6 @@ const SignupScreen = () => {
                 )}
               </View>
               <View style={loginStyles.inputContainer}>
-                <Text>Email</Text>
                 <TextInput
                   style={loginStyles.textInput}
                   placeholder="example@gmail.com"
@@ -64,7 +68,6 @@ const SignupScreen = () => {
               </View>
 
               <View style={loginStyles.inputContainer}>
-                <Text>Password</Text>
                 <TextInput
                   style={loginStyles.textInput}
                   placeholder="********"
@@ -80,9 +83,11 @@ const SignupScreen = () => {
                 <TouchableOpacity
                   style={loginStyles.btnSignIn}
                   onPress={handleSubmit}>
-                  <Text>Sign up</Text>
+                  <Text style={loginStyles.signupText}>Sign up</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={loginStyles.btnSignUp}>
+                <TouchableOpacity
+                  style={loginStyles.btnSignUp}
+                  onPress={() => navigation.navigate('LoginScreen')}>
                   <Text>Cancel</Text>
                 </TouchableOpacity>
               </View>
@@ -90,6 +95,7 @@ const SignupScreen = () => {
           )}
         </Formik>
       </View>
+      <View style={loginStyles.bottomView}></View>
     </SafeAreaView>
   );
 };
