@@ -14,6 +14,7 @@
 		3D2A1F744CB7930D3F586DD9 /* libPods-BestBuy.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AB6E945CA5B245E18E6A0E9D /* libPods-BestBuy.a */; };
 		494A333D411935C5DCEB1457 /* libPods-BestBuy-BestBuyTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D66496F1559CEED66D13A12 /* libPods-BestBuy-BestBuyTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		B53468E02693414B00F1033B /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53468DF2693414B00F1033B /* File.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +55,8 @@
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = BestBuy/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A2C1AF6C2A5501F4AB36C8B4 /* Pods-BestBuy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BestBuy.debug.xcconfig"; path = "Target Support Files/Pods-BestBuy/Pods-BestBuy.debug.xcconfig"; sourceTree = "<group>"; };
 		AB6E945CA5B245E18E6A0E9D /* libPods-BestBuy.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BestBuy.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B53468DE2693414A00F1033B /* BestBuy-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BestBuy-Bridging-Header.h"; sourceTree = "<group>"; };
+		B53468DF2693414B00F1033B /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		B594DA37DEB208FF9E20DB6E /* Pods-BestBuy-BestBuyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BestBuy-BestBuyTests.debug.xcconfig"; path = "Target Support Files/Pods-BestBuy-BestBuyTests/Pods-BestBuy-BestBuyTests.debug.xcconfig"; sourceTree = "<group>"; };
 		D89EFCB556AF4AA79DEF541E /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Regular.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf"; sourceTree = "<group>"; };
 		DBC4EE5C42994DF6B3159E54 /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
@@ -109,6 +112,8 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				B53468DF2693414B00F1033B /* File.swift */,
+				B53468DE2693414A00F1033B /* BestBuy-Bridging-Header.h */,
 			);
 			name = BestBuy;
 			sourceTree = "<group>";
@@ -249,7 +254,7 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						LastSwiftMigration = 1120;
+						LastSwiftMigration = 1220;
 					};
 				};
 			};
@@ -453,6 +458,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
+				B53468E02693414B00F1033B /* File.swift in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -472,6 +478,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B594DA37DEB208FF9E20DB6E /* Pods-BestBuy-BestBuyTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -499,6 +506,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = FA03E0FC09685A60AC706A58 /* Pods-BestBuy-BestBuyTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
 				INFOPLIST_FILE = BestBuyTests/Info.plist;
@@ -537,8 +545,9 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = CuongTT.BestBuy;
 				PRODUCT_NAME = BestBuy;
+				SWIFT_OBJC_BRIDGING_HEADER = "BestBuy-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -562,8 +571,9 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = CuongTT.BestBuy;
 				PRODUCT_NAME = BestBuy;
+				SWIFT_OBJC_BRIDGING_HEADER = "BestBuy-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
