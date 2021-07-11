@@ -49,7 +49,7 @@ const LoginScreen = ({navigation}) => {
     userLogin(data)
       .then(res => {
         if (res.data.statusCode === 200) {
-          console.log('LoginScreen', res.data.content.accessToken);
+          // console.log('LoginScreen', res.data.content.accessToken);
           setAccessToken(res.data.content.accessToken);
           dispatch({
             type: 'SET_ACCESS_TOKEN',

@@ -1,17 +1,18 @@
 import axios from 'axios';
+import {BASE_URL, userSubfix, POST} from '../utils/env';
 
 export const userSignup = data => {
   return axios({
-    url: 'http://svcy3.myclass.vn/api/Users/signup',
-    method: 'POST',
+    url: `${BASE_URL}/${userSubfix}/signup`,
+    method: POST,
     data,
   });
 };
 
 export const userLogin = data => {
   return axios({
-    url: 'http://svcy3.myclass.vn/api/Users/signin',
-    method: 'POST',
+    url: `${BASE_URL}/${userSubfix}/signin`,
+    method: POST,
     data,
   });
 };

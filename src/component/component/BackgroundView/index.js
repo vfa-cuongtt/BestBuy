@@ -1,10 +1,13 @@
 import React from 'react';
-import {StyleSheet, ImageBackground, View} from 'react-native';
-import {background} from '../../../assets/background/background.jpg';
+import {StyleSheet, ImageBackground} from 'react-native';
+import {background} from '../../../assets';
 
 const BackgroundView = ({children, style}) => {
   return (
-    <ImageBackground source={background} style={styles.background}>
+    <ImageBackground
+      source={background}
+      style={styles.background}
+      resizeMode="cover">
       {children}
     </ImageBackground>
   );
