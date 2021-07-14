@@ -4,3 +4,6 @@ export const getCategoriesState = state => {
 export const getProductState = state => {
   return state.productReducer.productListItem;
 };
+export const getProductByCategoryState = state => {
+  return state.productReducer.productByCategory;
+};

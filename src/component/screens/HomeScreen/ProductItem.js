@@ -1,10 +1,17 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {StyleSheet, Text, View, Dimensions, Image} from 'react-native';
 import AntIcon from 'react-native-vector-icons/AntDesign';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import {useDispatch, useSelector} from 'react-redux';
+import {getProductByCategoryState} from '../../redux/selectors/productSelection';
 const {width: screenWidth} = Dimensions.get('window');
 
 const ProductItem = props => {
+  const productByCategoryData = useSelector(getProductByCategoryState);
+  useEffect(() => {
+    // console.log('product_CuongTT', props);
+  }, [props]);
+
   return (
     <View style={styles.productItem}>
       <View style={styles.productHeader}>

@@ -16,3 +16,11 @@ export const getProductList = data => {
     data,
   });
 };
+
+export const getProductByCategory = id => {
+  console.log('getProductByCategory', id);
+  return axios({
+    url: `${BASE_URL}/${productSubfix}/getProductByCategory?categoryId=${id}`,
+    method: GET,
+  });
+};

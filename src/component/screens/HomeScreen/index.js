@@ -11,22 +11,24 @@ import {
 
 import {useDispatch, useSelector} from 'react-redux';
 import {BackgroundView} from '../../component';
-import {getAllCategory} from '../../api/productApi';
+// import {getAllCategory} from '../../api/productApi';
 import CategoriesItem from './CategoriesItem';
 import ProductItem from './ProductItem';
-import {fetchAllCategory} from '../../redux/actions/productAction';
-import {getCategoriesState} from '../../redux/selectors/productSelection';
+import {
+  fetchAllCategory,
+  fetchAllProduct,
+} from '../../redux/actions/productAction';
+import {
+  getCategoriesState,
+  getProductByCategoryState,
+} from '../../redux/selectors/productSelection';
 
 const HomeScreen = () => {
   const dispatch = useDispatch();
   // const [products, setProduct] = useState();
   // const [categories, setCategories] = useState();
   const categoriesData = useSelector(getCategoriesState);
-  // const productData = useSelector(getCategoriesState);
-
-  useEffect(() => {
-    console.log(categoriesData);
-  }, [categoriesData]);
+  const productByCategoryData = useSelector(getProductByCategoryState);
 
   useEffect(() => {
     dispatch(fetchAllCategory());
@@ -35,7 +37,7 @@ const HomeScreen = () => {
   const _renderCategoriesItem = ({item}) => {
     return <CategoriesItem categories={item} />;
   };
-  const _renderItem = ({item}) => {
+  const _renderProductItem = ({item}) => {
     return <ProductItem product={item} />;
   };
   return (
@@ -56,14 +58,16 @@ const HomeScreen = () => {
               renderItem={_renderCategoriesItem}
             />
           </View>
-          {/* <View style={styles.boxCategoriesList}>
+          <View style={styles.boxCategoriesList}>
             <FlatList
-                numColumns={2}
-                keyExtractor={(item, index) => `${item.name}_${item.index}`}
-                data={products}
-                renderItem={_renderItem}
-              />
-          </View> */}
+              showsHorizontalScrollIndicator={false}
+              horizontal={true}
+              numColumns={1}
+              keyExtractor={(item, index) => `${item.name}_${item.index}`}
+              data={productByCategoryData}
+              renderItem={_renderProductItem}
+            />
+          </View>
         </View>
         <View style={styles.bottomView}></View>
       </BackgroundView>

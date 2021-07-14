@@ -1,7 +1,12 @@
-import {CATEGORY_SUCCESS, PRODUCT_SUCCESS} from '../../utils/env';
+import {
+  CATEGORY_SUCCESS,
+  PRODUCT_SUCCESS,
+  PRODUCT_BY_CATEGORY_SUCCESS,
+} from '../../utils/env';
 const initialState = {
-  productListItem: [],
   categoriesItem: [],
+  productListItem: [],
+  productByCategory: [],
 };
 
 const productReducer = (state = {...initialState}, action) => {
@@ -11,6 +16,10 @@ const productReducer = (state = {...initialState}, action) => {
       return {...state};
     case PRODUCT_SUCCESS:
       state.productListItem = action.payload;
+      return {...state};
+    case PRODUCT_BY_CATEGORY_SUCCESS:
+      console.log('PRODUCT_BY_CATEGORY_SUCCESS', action.payload);
+      state.productByCategory = action.payload;
       return {...state};
     default:
       return {...state};
