@@ -1,30 +1,17 @@
 import React from 'react';
-import {
-  View,
-  SafeAreaView,
-  TextInput,
-  TouchableOpacity,
-  Image,
-} from 'react-native';
+import {View, SafeAreaView, Text, TouchableOpacity, Image} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
+import {BackgroundView} from '../../component';
+import GlobalStyles from '../../style/GlobalStyles';
 
 const DetailScreen = ({navigation}) => {
   return (
-    <SafeAreaView>
-      {/* <View style={styles.categoriesList}>
-            <FlatList
-              horizontal={true}
-              keyExtractor={item => `${item.id}`}
-              data={product}
-              renderItem={_renderCategoriesItem}
-            />
-            <FlatList
-              numColumns={2}
-              keyExtractor={(item, index) => `${item.name}_${item.index}`}
-              data={products}
-              renderItem={_renderItem}
-            />
-          </View> */}
+    <SafeAreaView style={[GlobalStyles.areaView]}>
+      <BackgroundView>
+        <View>
+          <Text>DetailScreen</Text>
+        </View>
+      </BackgroundView>
     </SafeAreaView>
   );
 };
