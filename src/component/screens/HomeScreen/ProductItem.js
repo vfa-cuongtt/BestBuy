@@ -1,19 +1,14 @@
 import React, {useEffect, useState} from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  Dimensions,
-  Image,
-  TouchableOpacity,
-} from 'react-native';
+import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
 import AntIcon from 'react-native-vector-icons/AntDesign';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {useDispatch, useSelector} from 'react-redux';
 import {getProductByCategoryState} from '../../redux/selectors/productSelection';
-const {width: screenWidth, height: screenHeight} = Dimensions.get('window');
+import ProductItemStyles from '../../style/ProductItemStyle';
+import {useNavigation} from '@react-navigation/native';
 
 const ProductItem = props => {
+  const navigation = useNavigation();
   const productByCategoryData = useSelector(getProductByCategoryState);
   useEffect(() => {
     console.log('product_CuongTT', props);
@@ -21,76 +16,38 @@ const ProductItem = props => {
 
   const onPressGetId = id => {
     console.log('onPressGetId', id);
+    navigation.navigate('DetailScreen');
   };
 
   return (
-    <View style={styles.productItem}>
-      <View style={styles.productHeader}>
+    <View style={ProductItemStyles.productItem}>
+      <View style={ProductItemStyles.productHeader}>
         <TouchableOpacity>
           <AntIcon name="heart" color="red" size={30} />
         </TouchableOpacity>
       </View>
 
-      <View style={styles.imgView}>
+      <View style={ProductItemStyles.imgView}>
         <Image
           source={{uri: props.product.image}}
-          style={styles.productImage}
+          style={ProductItemStyles.productImage}
         />
       </View>
-      <View style={styles.nameView}>
+      <View style={ProductItemStyles.nameView}>
         <TouchableOpacity onPress={() => onPressGetId(props.product.id)}>
-          <Text style={styles.productName}>{props.product.name}</Text>
+          <Text style={ProductItemStyles.productName}>
+            {props.product.name}
+          </Text>
         </TouchableOpacity>
       </View>
-      <View style={styles.productPrice}>
+      <View style={ProductItemStyles.productPrice}>
         <MaterialIcons name="attach-money" size={18} />
-        <Text style={styles.productPriceText}>{props.product.price}</Text>
+        <Text style={ProductItemStyles.productPriceText}>
+          {props.product.price}
+        </Text>
       </View>
     </View>
   );
 };
 
-const styles = StyleSheet.create({
-  productItem: {
-    width: screenWidth - 60,
-    height: '100%',
-    backgroundColor: '#fff',
-    borderRadius: 10,
-    paddingHorizontal: 8,
-    marginHorizontal: 7,
-    paddingTop: 20,
-    borderWidth: 1,
-    borderColor: 'rgba(178,178,178,0.5)',
-  },
-  productHeader: {
-    width: '100%',
-    height: '10%',
-    justifyContent: 'center',
-    alignItems: 'flex-end',
-  },
-  imgView: {
-    width: '100%',
-    height: '60%',
-  },
-  productImage: {
-    width: '100%',
-    height: '100%',
-  },
-  nameView: {
-    width: '100%',
-    height: '15%',
-  },
-  productName: {
-    fontSize: 25,
-    fontWeight: 'bold',
-  },
-  productPrice: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  productPriceText: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-});
 export default ProductItem;

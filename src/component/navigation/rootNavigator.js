@@ -6,6 +6,7 @@ import {getAccessToken, setAccessToken} from '../utils/storage';
 import {getAccessTokenSelector} from '../redux/selectors/loginSelector';
 import {useSelector, useDispatch} from 'react-redux';
 import RootTab from './rootTab';
+import DetailScreen from '../screens/DetailScreen/index';
 
 const Stack = createStackNavigator();
 
@@ -51,6 +52,7 @@ const RootNavigation = () => {
         <Stack.Navigator headerMode="none">
           <Stack.Screen name="RootTab" component={RootTab} />
           <Stack.Screen name="HomeScreen" component={HomeScreen} />
+          <Stack.Screen name="DetailScreen" component={DetailScreen} />
         </Stack.Navigator>
         {/* )} */}
       </>
