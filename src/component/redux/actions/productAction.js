@@ -40,6 +40,7 @@ export const fetchAllProduct = () => {
   return async dispatch => {
     try {
       const result = await getProductList();
+      console.log('fetchAllProduct', result.data);
       dispatch(fetchAllProductDataSuccess(result.data));
     } catch (error) {
       console.log('err', error);

@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 
-const ProductList = ({navigation}) => {
+const DetailScreen = ({navigation}) => {
   return (
     <SafeAreaView>
       {/* <View style={styles.categoriesList}>
@@ -29,4 +29,4 @@ const ProductList = ({navigation}) => {
   );
 };
 
-export default ProductList;
+export default DetailScreen;
