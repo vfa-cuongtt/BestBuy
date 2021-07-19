@@ -11,6 +11,9 @@ const GlobalStyles = StyleSheet.create({
   areaView: {
     flex: 1,
   },
+  textWhite: {
+    color: 'white',
+  },
 });
 
 export default GlobalStyles;
