@@ -20,7 +20,6 @@ const DetailScreen = props => {
   const {data, title, size} = props.route.params;
   useEffect(() => {
     // console.log('CuongTT', data);
-    console.log('cuongTT__', data.shortDescription);
   }, [props]);
 
   const _renderSize = ({item}) => {
@@ -44,7 +43,10 @@ const DetailScreen = props => {
           </View>
 
           <View style={DetailScreenStyles.titleView}>
-            {/* <Text style={DetailScreenStyles.textTitle}>{data.name}</Text> */}
+            <Text
+              style={[DetailScreenStyles.textTitle, GlobalStyles.textWhite]}>
+              {data.categories[0].id}
+            </Text>
           </View>
         </View>
         <View style={DetailScreenStyles.blockContent}>

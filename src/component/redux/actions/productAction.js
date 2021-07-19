@@ -29,7 +29,7 @@ export const fetchAllCategory = () => {
   return async dispatch => {
     try {
       const result = await getAllCategory();
-      dispatch(fetchCategoryDataSuccess(result.data));
+      dispatch(fetchCategoryDataSuccess(result.data.content));
     } catch (error) {
       console.log('err', error);
     }
@@ -40,8 +40,16 @@ export const fetchAllProduct = () => {
   return async dispatch => {
     try {
       const result = await getProductList();
-      console.log('fetchAllProduct', result.data);
-      dispatch(fetchAllProductDataSuccess(result.data));
+      let arr = result.data.content;
+
+      arr.forEach((item, i) => {
+        item.size = JSON.parse(`${item.size}`);
+        item.relatedProducts = JSON.parse(`${item.relatedProducts}`);
+        item.categories = JSON.parse(`${item.categories}`);
+        item.shortDescription = item.shortDescription.replace('\r\n', '');
+      });
+
+      dispatch(fetchAllProductDataSuccess(arr));
     } catch (error) {
       console.log('err', error);
     }
@@ -52,7 +60,13 @@ export const fetchProductByCategory = id => {
   return async dispatch => {
     try {
       const result = await getProductByCategory(id);
-      dispatch(fetchProductByCategorySuccess(result.data.content));
+      let arr = result.data.content;
+
+      arr.forEach((item, i) => {
+        item.description = item.description.replace('\r\n\r\n', '');
+        item.shortDescription = item.shortDescription.replace('\r\n', '');
+      });
+      dispatch(fetchProductByCategorySuccess(arr));
     } catch (error) {
       console.log('err', error);
     }

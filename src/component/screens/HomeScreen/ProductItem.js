@@ -11,7 +11,7 @@ const ProductItem = props => {
   const navigation = useNavigation();
   const productByCategoryData = useSelector(getProductByCategoryState);
   useEffect(() => {
-    console.log('product_CuongTT', props);
+    // console.log('product_CuongTT', props);
   }, [props]);
 
   const onPressGetId = data => {

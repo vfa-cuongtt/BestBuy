@@ -62,7 +62,7 @@ const HomeScreen = () => {
               showsHorizontalScrollIndicator={false}
               horizontal={true}
               keyExtractor={item => `${item.id}`}
-              data={categoriesData.content}
+              data={categoriesData}
               renderItem={_renderCategoriesItem}
             />
           </View>
@@ -94,7 +94,7 @@ const HomeScreen = () => {
               horizontal={true}
               numColumns={1}
               keyExtractor={(item, index) => `${item.name}_${item.index}`}
-              data={productListData.content}
+              data={productListData}
               renderItem={_renderAllProductItem}
               snapToInterval={110}
               decelerationRate="fast"
