@@ -16,9 +16,7 @@ const ProductIcon = props => {
   const onPressCategories = id => {
     // dispatch(fetchProductByCategory(id));
   };
-  useEffect(() => {
-    console.log('props.product', props.product.image);
-  }, [props.product]);
+
   return (
     <View style={ProductIconStyles.imgView}>
       <TouchableOpacity>

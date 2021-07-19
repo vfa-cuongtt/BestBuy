@@ -14,9 +14,9 @@ const ProductItem = props => {
     console.log('product_CuongTT', props);
   }, [props]);
 
-  const onPressGetId = id => {
-    console.log('onPressGetId', id);
-    navigation.navigate('DetailScreen');
+  const onPressGetId = data => {
+    console.log('onPressGetId', data);
+    navigation.navigate('DetailScreen', {data});
   };
 
   return (
@@ -34,7 +34,7 @@ const ProductItem = props => {
         />
       </View>
       <View style={ProductItemStyles.nameView}>
-        <TouchableOpacity onPress={() => onPressGetId(props.product.id)}>
+        <TouchableOpacity onPress={() => onPressGetId(props.product)}>
           <Text style={ProductItemStyles.productName}>
             {props.product.name}
           </Text>
@@ -43,7 +43,7 @@ const ProductItem = props => {
       <View style={ProductItemStyles.productPrice}>
         <MaterialIcons name="attach-money" size={18} />
         <Text style={ProductItemStyles.productPriceText}>
-          {props.product.price}
+          {props.product.price}.00
         </Text>
       </View>
     </View>
