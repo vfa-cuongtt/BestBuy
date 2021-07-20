@@ -7,3 +7,4 @@ export const CATEGORY_SUCCESS = 'CATEGORY_SUCCESS';
 export const PRODUCT_SUCCESS = 'PRODUCT_SUCCESS';
 export const PRODUCT_BY_CATEGORY_SUCCESS = 'PRODUCT_BY_CATEGORY_SUCCESS';
 export const ERROR = 'ERROR';
+export const BEARER = 'Bearer ';
