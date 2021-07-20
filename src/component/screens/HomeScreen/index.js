@@ -24,10 +24,12 @@ import {
 import AntIcon from 'react-native-vector-icons/AntDesign';
 import ProductIcon from './ProductIcon';
 import HomeScreenStyles from '../../style/HomeScreenStyles';
+import {useNavigation} from '@react-navigation/native';
 
 const {width: screenWidth} = Dimensions.get('window');
 
 const HomeScreen = () => {
+  const navigation = useNavigation();
   const dispatch = useDispatch();
   const categoriesData = useSelector(getCategoriesState);
   const productByCategoryData = useSelector(getProductByCategoryState);
@@ -47,6 +49,9 @@ const HomeScreen = () => {
   };
   const _renderAllProductItem = ({item}) => {
     return <ProductIcon product={item} />;
+  };
+  const showAll = () => {
+    navigation.navigate('ListItem');
   };
   return (
     <SafeAreaView style={HomeScreenStyles.areaView}>
@@ -82,7 +87,7 @@ const HomeScreen = () => {
         <View style={HomeScreenStyles.bottomView}>
           <View style={HomeScreenStyles.bottomBlock}>
             <Text style={HomeScreenStyles.allCategoryText}>All Categories</Text>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => showAll()}>
               <Text style={HomeScreenStyles.showAllText}>
                 Show all <AntIcon name="right" size={15} />
               </Text>

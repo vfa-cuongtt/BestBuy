@@ -17,13 +17,15 @@ const RootTab = () => {
       backgroundColor: 'black',
       borderWidth: 0,
       borderRadius: 8,
+      marginHorizontal: 10,
+      marginVertical: 5,
     },
   };
 
   const screenOptions = ({route}) => ({
     tabBarIcon: ({focused, color}) => {
       let iconName;
-      const backgroundColor = 'white';
+      const backgroundColor = 'black';
       const fontSize = focused ? 30 : 20;
 
       switch (route.name) {
@@ -44,7 +46,7 @@ const RootTab = () => {
             {backgroundColor},
             focused && RootTabStyles.active,
           ]}>
-          <EntypoIcon name={iconName} size={fontSize} color="black" />
+          <EntypoIcon name={iconName} size={fontSize} color="white" />
         </View>
       );
     },
