@@ -10,14 +10,20 @@ import {
 import AntIcon from 'react-native-vector-icons/AntDesign';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import ListItemStyles from '../../style/ListItemStyles';
+import {useNavigation} from '@react-navigation/native';
 
 const ProductItem = props => {
+  const navigation = useNavigation();
   const {image, price, name} = props.product.item;
   useEffect(() => {
     console.log('product_CuongTT', props.product.item);
   }, [props]);
 
-  const onPressGetId = () => {};
+  const onPressGetId = data => {
+    console.log('onPressGetId', data);
+    navigation.navigate('DetailScreen', {data});
+  };
+
   return (
     <View style={ListItemStyles.productItem}>
       <View style={ListItemStyles.productHeader}>
@@ -30,7 +36,7 @@ const ProductItem = props => {
         <Image source={{uri: image}} style={ListItemStyles.productImage} />
       </View>
       <View style={ListItemStyles.nameView}>
-        <TouchableOpacity onPress={() => onPressGetId(props.product)}>
+        <TouchableOpacity onPress={() => onPressGetId(props.product.item)}>
           <Text style={ListItemStyles.productName}>{name}</Text>
         </TouchableOpacity>
       </View>
