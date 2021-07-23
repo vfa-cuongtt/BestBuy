@@ -2,11 +2,15 @@ import {
   CATEGORY_SUCCESS,
   PRODUCT_SUCCESS,
   PRODUCT_BY_CATEGORY_SUCCESS,
+  GET_PRODUCT_LIKED,
+  SET_PRODUCT_LIKED,
+  GET_PRODUCT_FAVORITE,
 } from '../../utils/env';
 const initialState = {
   categoriesItem: [],
   productListItem: [],
   productByCategory: [],
+  productFavorite: [],
 };
 
 const productReducer = (state = {...initialState}, action) => {
@@ -18,8 +22,10 @@ const productReducer = (state = {...initialState}, action) => {
       state.productListItem = action.payload;
       return {...state};
     case PRODUCT_BY_CATEGORY_SUCCESS:
-      console.log('PRODUCT_BY_CATEGORY_SUCCESS', action.payload);
       state.productByCategory = action.payload;
+      return {...state};
+    case GET_PRODUCT_FAVORITE:
+      state.productFavorite = action.payload;
       return {...state};
     default:
       return {...state};

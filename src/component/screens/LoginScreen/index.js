@@ -11,7 +11,12 @@ import {
 import {Formik} from 'formik';
 import * as Yup from 'yup';
 import {userLogin} from '../../api/userLoginApi';
-import {setAccessToken, getAccessToken} from '../../utils/storage';
+import {
+  setAccessToken,
+  getAccessToken,
+  setEmail,
+  setIsLogin,
+} from '../../utils/storage';
 import {LoginButton} from 'react-native-fbsdk-next';
 import {useDispatch} from 'react-redux';
 import {logo} from '../../../assets';
@@ -50,10 +55,14 @@ const LoginScreen = ({navigation}) => {
       .then(res => {
         if (res.data.statusCode === 200) {
           // console.log('LoginScreen', res.data.content.accessToken);
-          setAccessToken(res.data.content.accessToken);
+          const {accessToken, email} = res.data.content;
+
+          setAccessToken(accessToken);
+          setEmail(email);
+          setIsLogin('true');
           dispatch({
             type: 'SET_ACCESS_TOKEN',
-            payload: res.data.content.accessToken,
+            payload: accessToken,
           });
         }
       })

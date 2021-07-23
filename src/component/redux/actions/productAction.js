@@ -5,12 +5,19 @@ import {
   getAllCategory,
   getProductList,
   getProductByCategory,
+  likeProduct,
+  getProductFavorite,
 } from '../../api/productApi';
+
 import {
   CATEGORY_SUCCESS,
   PRODUCT_SUCCESS,
   PRODUCT_BY_CATEGORY_SUCCESS,
+  GET_PRODUCT_LIKED,
+  SET_PRODUCT_LIKED,
+  GET_PRODUCT_FAVORITE,
 } from '../../utils/env';
+import {getAccessToken} from '../../utils/storage';
 
 export const fetchCategoryDataSuccess = payload => ({
   type: CATEGORY_SUCCESS,
@@ -22,6 +29,14 @@ export const fetchAllProductDataSuccess = payload => ({
 });
 export const fetchProductByCategorySuccess = payload => ({
   type: PRODUCT_BY_CATEGORY_SUCCESS,
+  payload,
+});
+export const getProductLikedSuccess = payload => ({
+  type: GET_PRODUCT_LIKED,
+  payload,
+});
+export const getProductFavoriteSuccess = payload => ({
+  type: GET_PRODUCT_FAVORITE,
   payload,
 });
 
@@ -72,3 +87,30 @@ export const fetchProductByCategory = id => {
     }
   };
 };
+
+export const getProductLiked = () => {
+  return async dispatch => {
+    try {
+      const result = await likeProduct();
+      console.log('getProductLiked', result);
+      // dispatch(getProductLikedSuccess(result))
+    } catch (error) {
+      console.log('ERROR', error);
+    }
+  };
+};
+
+export const fetchProductFavorite = () => {
+  return async dispatch => {
+    try {
+      let token = await getAccessToken();
+      const result = await getProductFavorite(token);
+      console.log('getProductLiked', result.data.content);
+      dispatch(getProductFavoriteSuccess(result.data.content));
+    } catch (error) {
+      console.log('ERROR', error);
+    }
+  };
+};
+
+export const fetchLikeProduct = productId => {};

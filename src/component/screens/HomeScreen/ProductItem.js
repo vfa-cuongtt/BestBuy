@@ -3,15 +3,20 @@ import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
 import AntIcon from 'react-native-vector-icons/AntDesign';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {useDispatch, useSelector} from 'react-redux';
-import {getProductByCategoryState} from '../../redux/selectors/productSelection';
+import {
+  getProductByCategoryState,
+  getProductFavoriteState,
+} from '../../redux/selectors/productSelection';
 import ProductItemStyles from '../../style/ProductItemStyle';
 import {useNavigation} from '@react-navigation/native';
 
 const ProductItem = props => {
   const navigation = useNavigation();
   const productByCategoryData = useSelector(getProductByCategoryState);
+
   useEffect(() => {
-    // console.log('product_CuongTT', props);
+    // console.log('product_CuongTT', props.product);
+    // console.log('productFavoriteData', productFavoriteData);
   }, [props]);
 
   const onPressGetId = data => {
@@ -19,11 +24,15 @@ const ProductItem = props => {
     navigation.navigate('DetailScreen', {data});
   };
 
+  const onPressLikeProduct = id => {
+    console.log('product_ID', id);
+  };
+
   return (
     <View style={ProductItemStyles.productItem}>
       <View style={ProductItemStyles.productHeader}>
-        <TouchableOpacity>
-          <AntIcon name="heart" color="red" size={30} />
+        <TouchableOpacity onPress={() => onPressLikeProduct(props.product.id)}>
+          <AntIcon name="hearto" size={30} />
         </TouchableOpacity>
       </View>
 

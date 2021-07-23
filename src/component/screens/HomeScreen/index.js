@@ -15,16 +15,19 @@ import {
   fetchAllCategory,
   fetchAllProduct,
   fetchProductByCategory,
+  fetchProductFavorite,
 } from '../../redux/actions/productAction';
 import {
   getCategoriesState,
   getProductByCategoryState,
   getProductState,
+  getProductFavoriteState,
 } from '../../redux/selectors/productSelection';
 import AntIcon from 'react-native-vector-icons/AntDesign';
 import ProductIcon from './ProductIcon';
 import HomeScreenStyles from '../../style/HomeScreenStyles';
 import {useNavigation} from '@react-navigation/native';
+import {getAccessToken, removeAccessToken} from '../../utils/storage';
 
 const {width: screenWidth} = Dimensions.get('window');
 
@@ -34,12 +37,20 @@ const HomeScreen = () => {
   const categoriesData = useSelector(getCategoriesState);
   const productByCategoryData = useSelector(getProductByCategoryState);
   const productListData = useSelector(getProductState);
+  const productFavoriteData = useSelector(getProductFavoriteState);
 
   useEffect(() => {
     dispatch(fetchAllCategory());
     dispatch(fetchProductByCategory('ADIDAS'));
     dispatch(fetchAllProduct());
+    dispatch(fetchProductFavorite());
+
+    // removeAccessToken();
   }, []);
+
+  useEffect(() => {
+    console.log('productFavoriteData', productFavoriteData);
+  }, [productFavoriteData]);
 
   const _renderCategoriesItem = ({item}) => {
     return <CategoriesItem categories={item} />;

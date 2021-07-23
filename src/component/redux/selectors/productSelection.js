@@ -7,3 +7,6 @@ export const getProductState = state => {
 export const getProductByCategoryState = state => {
   return state.productReducer.productByCategory;
 };
+export const getProductFavoriteState = state => {
+  return state.productReducer.productFavorite;
+};
