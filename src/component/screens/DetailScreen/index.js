@@ -23,23 +23,22 @@ import {useDispatch, useSelector} from 'react-redux';
 const DetailScreen = props => {
   const dispatch = useDispatch();
   const {data, title, size} = props.route.params;
-  const [liked, setLiked] = useState();
+  const [liked, setLiked] = useState(data.liked);
 
   useEffect(() => {
     console.log('DataDetail', data);
   }, [props]);
 
-  const onPressLikeProduct = (id, islike = false) => {
+  const onPressLikeProduct = async (id, islike) => {
     console.log('product_ID', id, islike);
-    // setLiked(!liked);
-
     if (islike) {
       console.log('unlike');
-      dispatch(setUnlikeProduct(id));
+      await dispatch(setUnlikeProduct(id));
     } else {
       console.log('like');
-      dispatch(setProductLiked(id));
+      await dispatch(setProductLiked(id));
     }
+    dispatch(fetchProductFavorite());
     setLiked(!islike);
   };
 
@@ -75,7 +74,7 @@ const DetailScreen = props => {
             <View style={DetailScreenStyles.iconLike}>
               <TouchableOpacity
                 onPress={() => onPressLikeProduct(data.id, data.liked)}>
-                <AntIcon name={data.liked ? 'heart' : 'hearto'} size={30} />
+                <AntIcon name={liked ? 'heart' : 'hearto'} size={30} />
               </TouchableOpacity>
             </View>
             <View style={DetailScreenStyles.viewImg}>
