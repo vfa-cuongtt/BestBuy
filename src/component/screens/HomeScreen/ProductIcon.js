@@ -13,7 +13,6 @@ import {useNavigation} from '@react-navigation/native';
 
 const ProductIcon = props => {
   const {image, id} = props.product;
-  const dispatch = useDispatch();
   const navigation = useNavigation();
 
   const onPressCategories = data => {
@@ -23,7 +22,7 @@ const ProductIcon = props => {
   };
 
   useEffect(() => {
-    // console.log('props__product', props.product);
+    // console.log('ProductIcon_props', props.product);
   }, [props]);
 
   return (

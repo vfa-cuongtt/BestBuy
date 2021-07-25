@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
   StyleSheet,
   Text,
@@ -17,7 +17,10 @@ import ProductItem from './Item';
 import ListItemStyles from '../../style/ListItemStyles';
 
 const ListItem = props => {
-  const productListData = useSelector(getProductState);
+  const {allItem} = props.route.params;
+  useEffect(() => {
+    console.log('ListItem', allItem);
+  }, [props]);
 
   const _renderAllProductItem = item => {
     return <ProductItem product={item} />;
@@ -37,7 +40,7 @@ const ListItem = props => {
           <FlatList
             numColumns={2}
             keyExtractor={(item, index) => `${item.name}_${item.index}`}
-            data={productListData}
+            data={allItem}
             renderItem={_renderAllProductItem}
           />
         </View>
