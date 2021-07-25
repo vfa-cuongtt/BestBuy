@@ -92,9 +92,9 @@ export const fetchProductByCategory = id => {
 export const setProductLiked = id => {
   return async dispatch => {
     try {
-      console.log('setProductLiked', id);
+      // console.log('setProductLiked', id);
       const result = await likeProduct(id);
-      console.log('getProductLiked', result);
+      console.log('setProductLiked', result.data);
       // fetchProductFavorite();
     } catch (error) {
       console.log('ERROR', error);
@@ -106,7 +106,7 @@ export const setUnlikeProduct = id => {
   return async dispatch => {
     try {
       const result = await unlikeProduct(id);
-      console.log('setUnlikeProduct', result);
+      console.log('setUnlikeProduct', result.data);
     } catch (error) {
       console.log('ERROR', error);
     }
@@ -119,7 +119,7 @@ export const fetchProductFavorite = () => {
       console.log('call fetchProductFavorite()');
       let token = await getAccessToken();
       const result = await getProductFavorite(token);
-      console.log('getProductLiked', result.data.content);
+      console.log('fetchProductFavorite__result', result.data.content);
       dispatch(getProductFavoriteSuccess(result.data.content));
     } catch (error) {
       console.log('ERROR', error);

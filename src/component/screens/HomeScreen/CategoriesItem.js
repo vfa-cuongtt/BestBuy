@@ -6,17 +6,20 @@ import CategoriesItemStyles from '../../style/CategoriesItemStyles';
 
 const CategoriesItem = props => {
   const dispatch = useDispatch();
-  const [active, setActive] = useState(false);
 
   const onPressCategories = id => {
-    dispatch(fetchProductByCategory(id));
-    setActive(!active);
+    console.log('onPressCategories', id);
+    // dispatch(fetchProductByCategory(id));
+    props.pressCallback(id);
   };
 
   return (
     <TouchableOpacity onPress={() => onPressCategories(props.categories.id)}>
       <Text
-        style={[CategoriesItemStyles.categoriesText, active && styles.active]}>
+        style={[
+          CategoriesItemStyles.categoriesText,
+          props.activeTab === props.categories.id && styles.active,
+        ]}>
         {props.categories.id}
       </Text>
     </TouchableOpacity>

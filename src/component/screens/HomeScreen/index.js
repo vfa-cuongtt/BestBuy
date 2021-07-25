@@ -7,7 +7,7 @@ import {
   FlatList,
   Dimensions,
 } from 'react-native';
-import {useDispatch, useSelector} from 'react-redux';
+import {useDispatch, useSelector, useStore} from 'react-redux';
 import {BackgroundView} from '../../component';
 import CategoriesItem from './CategoriesItem';
 import ProductItem from './ProductItem';
@@ -34,49 +34,75 @@ import productReducer from '../../redux/reducers/productReducer';
 const {width: screenWidth} = Dimensions.get('window');
 
 const HomeScreen = () => {
-  const [isReload, setIsReload] = useState(false);
+  const [activeTab, setActiveTab] = useState('ADIDAS');
 
   const navigation = useNavigation();
   const dispatch = useDispatch();
+
   const categoriesData = useSelector(getCategoriesState);
-  const productByCategoryData = useSelector(getProductByCategoryState);
   const productListData = useSelector(getProductState);
   const productFavoriteData = useSelector(getProductFavoriteState);
 
-  const [productByCategoryArr, setProductByCategoryArr] = useState(
-    productByCategoryData,
-  );
+  const [productArr, setProductArr] = useState(productListData);
 
   useEffect(() => {
     dispatch(fetchAllCategory());
-    dispatch(fetchProductByCategory('ADIDAS'));
-    dispatch(fetchAllProduct());
-    dispatch(fetchProductFavorite());
-
-    // removeAccessToken();
+    dispatch(fetchAllProduct()); // =>.lu o store
+    dispatch(fetchProductFavorite()); //  =>.lu o store
   }, []);
 
   useEffect(() => {
-    // console.log('productFavoriteData', productFavoriteData.productsFavorite);
+    prepareData();
+  }, [productFavoriteData]);
+
+  const prepareData = async () => {
     const favorite = productFavoriteData.productsFavorite;
-    const productByCategoryArr = setFavoriteData(
+
+    console.log('Index_productListData', productListData);
+    const _productListDataArr = await setFavoriteData(
       favorite,
-      productByCategoryData,
+      productListData,
     );
-    const productListDataArr = setFavoriteData(favorite, productListData);
+    console.log('Index_productByCategoryData', _productListDataArr);
 
-    console.log('Product list__', productListDataArr);
+    const tempArr = _productListDataArr.filter(item => {
+      return (
+        item.categories[0].id === activeTab ||
+        item.categories[1].id === activeTab ||
+        item.categories[2].id === activeTab
+      );
+    });
 
-    setProductByCategoryArr(productByCategoryArr);
-    console.log('Test___', productReducer.state);
+    console.log('Index_useEffect_tempArr', tempArr);
 
-    setIsReload(true);
+    setProductArr(tempArr);
+  };
 
-    console.log('Test productByCategoryData', productByCategoryArr);
-  }, [productFavoriteData, productByCategoryData, productListData]);
+  const onTabPress = id => {
+    const tempArr = productListData.filter(item => {
+      return (
+        item.categories[0].id === id ||
+        item.categories[1].id === id ||
+        item.categories[2].id === id
+      );
+    });
+    setActiveTab(id);
+    const _productArr = setFavoriteData(
+      productFavoriteData.productsFavorite,
+      tempArr,
+    );
+    console.log('Index_onTabPress', tempArr);
+    setProductArr(_productArr);
+  };
 
   const _renderCategoriesItem = ({item}) => {
-    return <CategoriesItem categories={item} />;
+    return (
+      <CategoriesItem
+        categories={item}
+        pressCallback={onTabPress}
+        activeTab={activeTab}
+      />
+    );
   };
   const _renderProductByCategoriesItem = ({item}) => {
     return <ProductItem product={item} />;
@@ -116,11 +142,10 @@ const HomeScreen = () => {
               horizontal={true}
               numColumns={1}
               keyExtractor={(item, index) => `${item.name}_${item.index}`}
-              data={productByCategoryArr}
+              data={productArr}
               renderItem={_renderProductByCategoriesItem}
               snapToInterval={screenWidth - 45}
               decelerationRate="fast"
-              extraData={isReload}
             />
           </View>
         </View>

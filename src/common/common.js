@@ -1,14 +1,16 @@
 export const setFavoriteData = (favoriteArr, productArr) => {
-  let arr = [...productArr];
+  console.log('COMMON_favoriteArr', favoriteArr);
   if (favoriteArr) {
-    for (let i = 0; i < arr.length; i++) {
-      for (let j = 0; j < favoriteArr.length; j++) {
-        if (arr[i].id === favoriteArr[j].id) {
-          console.log('CuongTT___LIKED___', favoriteArr[j].id);
-          arr[i].liked = true;
-        }
+    productArr.forEach((item, i) => {
+      let favoriteId = favoriteArr.find(el => el.id === item.id);
+      console.log('COMMON_favoriteId', favoriteId);
+      console.log('COMMON_i', i);
+      if (favoriteId) {
+        productArr[i].liked = true;
+      } else {
+        productArr[i].liked = false;
       }
-    }
+    });
   }
-  return arr;
+  return [...productArr];
 };

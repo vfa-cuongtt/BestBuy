@@ -13,35 +13,34 @@ import {
   setProductLiked,
   setUnlikeProduct,
   fetchProductFavorite,
+  fetchAllProduct,
 } from '../../redux/actions/productAction';
 
 const ProductItem = props => {
   const [liked, setLiked] = useState();
   const {id, image, name, price} = props.product;
   const navigation = useNavigation();
-  const productByCategoryData = useSelector(getProductByCategoryState);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // console.log('product_CuongTT', props.product);
-    // console.log('productFavoriteData', productFavoriteData);
     setLiked(props.product.liked);
   }, [props]);
 
   const onPressGetId = data => {
-    // console.log('onPressGetId', data);
     navigation.navigate('DetailScreen', {data});
   };
 
-  const onPressLikeProduct = id => {
+  const onPressLikeProduct = async id => {
     console.log('product_ID', id);
     setLiked(!liked);
 
     if (!liked) {
-      dispatch(setProductLiked(id));
+      await dispatch(setProductLiked(id));
     } else {
-      dispatch(setUnlikeProduct(id));
+      await dispatch(setUnlikeProduct(id));
     }
+
+    dispatch(fetchProductFavorite());
   };
 
   return (
