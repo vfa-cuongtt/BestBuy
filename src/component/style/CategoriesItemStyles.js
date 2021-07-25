@@ -5,7 +5,8 @@ const CategoriesItemStyles = StyleSheet.create({
     fontSize: 20,
     fontWeight: '700',
     paddingHorizontal: 10,
-    color: 'white',
+    // color: 'white',
+    color: '#38373c',
   },
 });
 

@@ -16,7 +16,7 @@ const ProductItem = props => {
   const navigation = useNavigation();
   const {image, price, name} = props.product.item;
   useEffect(() => {
-    console.log('product_CuongTT', props.product.item);
+    console.log('product_CuongTT_ProductItem', props.product.item);
   }, [props]);
 
   const onPressGetId = data => {
@@ -28,7 +28,7 @@ const ProductItem = props => {
     <View style={ListItemStyles.productItem}>
       <View style={ListItemStyles.productHeader}>
         <TouchableOpacity>
-          <AntIcon name="heart" color="red" size={20} />
+          <AntIcon name="hearto" size={20} />
         </TouchableOpacity>
       </View>
 

@@ -7,6 +7,7 @@ import {
   getProductByCategory,
   likeProduct,
   getProductFavorite,
+  unlikeProduct,
 } from '../../api/productApi';
 
 import {
@@ -88,12 +89,24 @@ export const fetchProductByCategory = id => {
   };
 };
 
-export const getProductLiked = () => {
+export const setProductLiked = id => {
   return async dispatch => {
     try {
-      const result = await likeProduct();
-      console.log('getProductLiked', result);
-      // dispatch(getProductLikedSuccess(result))
+      // console.log('setProductLiked', id);
+      const result = await likeProduct(id);
+      console.log('setProductLiked', result.data);
+      // fetchProductFavorite();
+    } catch (error) {
+      console.log('ERROR', error);
+    }
+  };
+};
+
+export const setUnlikeProduct = id => {
+  return async dispatch => {
+    try {
+      const result = await unlikeProduct(id);
+      console.log('setUnlikeProduct', result.data);
     } catch (error) {
       console.log('ERROR', error);
     }
@@ -103,9 +116,10 @@ export const getProductLiked = () => {
 export const fetchProductFavorite = () => {
   return async dispatch => {
     try {
+      console.log('call fetchProductFavorite()');
       let token = await getAccessToken();
       const result = await getProductFavorite(token);
-      console.log('getProductLiked', result.data.content);
+      console.log('fetchProductFavorite__result', result.data.content);
       dispatch(getProductFavoriteSuccess(result.data.content));
     } catch (error) {
       console.log('ERROR', error);

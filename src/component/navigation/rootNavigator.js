@@ -46,19 +46,19 @@ const RootNavigation = () => {
   return (
     <NavigationContainer>
       <>
-        {!isLogin ? (
+        {/* {!isLogin ? (
           <Stack.Navigator headerMode="none">
             <Stack.Screen name="LoginScreen" component={LoginScreen} />
             <Stack.Screen name="SignupScreen" component={SignupScreen} />
           </Stack.Navigator>
-        ) : (
-          <Stack.Navigator headerMode="none">
-            <Stack.Screen name="RootTab" component={RootTab} />
-            <Stack.Screen name="HomeScreen" component={HomeScreen} />
-            <Stack.Screen name="DetailScreen" component={DetailScreen} />
-            <Stack.Screen name="ListItem" component={ListItem} />
-          </Stack.Navigator>
-        )}
+        ) : ( */}
+        <Stack.Navigator headerMode="none">
+          <Stack.Screen name="RootTab" component={RootTab} />
+          <Stack.Screen name="HomeScreen" component={HomeScreen} />
+          <Stack.Screen name="DetailScreen" component={DetailScreen} />
+          <Stack.Screen name="ListItem" component={ListItem} />
+        </Stack.Navigator>
+        {/* )} */}
       </>
     </NavigationContainer>
   );

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {StyleSheet, Text, TouchableOpacity} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {fetchProductByCategory} from '../../redux/actions/productAction';
@@ -8,15 +8,28 @@ const CategoriesItem = props => {
   const dispatch = useDispatch();
 
   const onPressCategories = id => {
-    dispatch(fetchProductByCategory(id));
+    console.log('onPressCategories', id);
+    // dispatch(fetchProductByCategory(id));
+    props.pressCallback(id);
   };
+
   return (
     <TouchableOpacity onPress={() => onPressCategories(props.categories.id)}>
-      <Text style={CategoriesItemStyles.categoriesText}>
+      <Text
+        style={[
+          CategoriesItemStyles.categoriesText,
+          props.activeTab === props.categories.id && styles.active,
+        ]}>
         {props.categories.id}
       </Text>
     </TouchableOpacity>
   );
 };
+
+const styles = StyleSheet.create({
+  active: {
+    color: 'white',
+  },
+});
 
 export default CategoriesItem;

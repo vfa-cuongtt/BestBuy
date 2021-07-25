@@ -7,7 +7,7 @@ import {
   FlatList,
   Dimensions,
 } from 'react-native';
-import {useDispatch, useSelector} from 'react-redux';
+import {useDispatch, useSelector, useStore} from 'react-redux';
 import {BackgroundView} from '../../component';
 import CategoriesItem from './CategoriesItem';
 import ProductItem from './ProductItem';
@@ -28,38 +28,92 @@ import ProductIcon from './ProductIcon';
 import HomeScreenStyles from '../../style/HomeScreenStyles';
 import {useNavigation} from '@react-navigation/native';
 import {getAccessToken, removeAccessToken} from '../../utils/storage';
+import {setFavoriteData} from '../../../common/common';
+import productReducer from '../../redux/reducers/productReducer';
 
 const {width: screenWidth} = Dimensions.get('window');
 
 const HomeScreen = () => {
+  const [activeTab, setActiveTab] = useState('ADIDAS');
+
   const navigation = useNavigation();
   const dispatch = useDispatch();
+
   const categoriesData = useSelector(getCategoriesState);
-  const productByCategoryData = useSelector(getProductByCategoryState);
   const productListData = useSelector(getProductState);
   const productFavoriteData = useSelector(getProductFavoriteState);
 
+  const [productArr, setProductArr] = useState(productListData);
+
   useEffect(() => {
     dispatch(fetchAllCategory());
-    dispatch(fetchProductByCategory('ADIDAS'));
-    dispatch(fetchAllProduct());
-    dispatch(fetchProductFavorite());
-
-    // removeAccessToken();
+    dispatch(fetchAllProduct()); // =>.lu o store
+    dispatch(fetchProductFavorite()); //  =>.lu o store
   }, []);
 
   useEffect(() => {
-    console.log('productFavoriteData', productFavoriteData);
+    prepareData();
   }, [productFavoriteData]);
 
+  const prepareData = async () => {
+    const favorite = productFavoriteData.productsFavorite;
+
+    console.log('Index_productListData', productListData);
+    const _productListDataArr = await setFavoriteData(
+      favorite,
+      productListData,
+    );
+    console.log('Index_productByCategoryData', _productListDataArr);
+
+    const tempArr = _productListDataArr.filter(item => {
+      return (
+        item.categories[0].id === activeTab ||
+        item.categories[1].id === activeTab ||
+        item.categories[2].id === activeTab
+      );
+    });
+
+    console.log('Index_useEffect_tempArr', tempArr);
+
+    setProductArr(tempArr);
+  };
+
+  const onTabPress = id => {
+    const tempArr = productListData.filter(item => {
+      return (
+        item.categories[0].id === id ||
+        item.categories[1].id === id ||
+        item.categories[2].id === id
+      );
+    });
+    setActiveTab(id);
+    const _productArr = setFavoriteData(
+      productFavoriteData.productsFavorite,
+      tempArr,
+    );
+    console.log('Index_onTabPress', tempArr);
+    setProductArr(_productArr);
+  };
+
   const _renderCategoriesItem = ({item}) => {
-    return <CategoriesItem categories={item} />;
+    return (
+      <CategoriesItem
+        categories={item}
+        pressCallback={onTabPress}
+        activeTab={activeTab}
+      />
+    );
   };
   const _renderProductByCategoriesItem = ({item}) => {
     return <ProductItem product={item} />;
   };
   const _renderAllProductItem = ({item}) => {
-    return <ProductIcon product={item} />;
+    return (
+      <ProductIcon
+        product={item}
+        favoriteArr={productFavoriteData.productsFavorite}
+      />
+    );
   };
   const showAll = () => {
     navigation.navigate('ListItem');
@@ -88,7 +142,7 @@ const HomeScreen = () => {
               horizontal={true}
               numColumns={1}
               keyExtractor={(item, index) => `${item.name}_${item.index}`}
-              data={productByCategoryData}
+              data={productArr}
               renderItem={_renderProductByCategoriesItem}
               snapToInterval={screenWidth - 45}
               decelerationRate="fast"
