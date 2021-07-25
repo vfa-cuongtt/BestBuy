@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   SafeAreaView,
@@ -13,14 +13,35 @@ import IonicIcon from 'react-native-vector-icons/Ionicons';
 import DetailScreenStyles from '../../style/DetailScreenStyles';
 import AntIcon from 'react-native-vector-icons/AntDesign';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-
-// import {useNavigation} from '@react-navigation/native';
+import {
+  setProductLiked,
+  setUnlikeProduct,
+  fetchProductFavorite,
+} from '../../redux/actions/productAction';
+import {useDispatch, useSelector} from 'react-redux';
 
 const DetailScreen = props => {
+  const dispatch = useDispatch();
   const {data, title, size} = props.route.params;
+  const [liked, setLiked] = useState();
+
   useEffect(() => {
-    // console.log('CuongTT', data);
+    console.log('DataDetail', data);
   }, [props]);
+
+  const onPressLikeProduct = (id, islike = false) => {
+    console.log('product_ID', id, islike);
+    // setLiked(!liked);
+
+    if (islike) {
+      console.log('unlike');
+      dispatch(setUnlikeProduct(id));
+    } else {
+      console.log('like');
+      dispatch(setProductLiked(id));
+    }
+    setLiked(!islike);
+  };
 
   const _renderSize = ({item}) => {
     return (
@@ -52,8 +73,9 @@ const DetailScreen = props => {
         <View style={DetailScreenStyles.blockContent}>
           <View style={DetailScreenStyles.blockImg}>
             <View style={DetailScreenStyles.iconLike}>
-              <TouchableOpacity>
-                <AntIcon name="heart" color="red" size={30} />
+              <TouchableOpacity
+                onPress={() => onPressLikeProduct(data.id, data.liked)}>
+                <AntIcon name={data.liked ? 'heart' : 'hearto'} size={30} />
               </TouchableOpacity>
             </View>
             <View style={DetailScreenStyles.viewImg}>

@@ -1,3 +1,4 @@
+import {setFavoriteData} from '../../../common/common';
 import {
   CATEGORY_SUCCESS,
   PRODUCT_SUCCESS,

@@ -7,6 +7,7 @@ import {
   GET,
   POST,
   BEARER,
+  TOKEN,
 } from '../utils/env';
 
 /**
@@ -49,18 +50,30 @@ export const getProductByCategory = id => {
 };
 
 /**
- * GET / SET Product liked
+ * SET Product liked
  * @param {*} productId
  * @returns
  */
-export const likeProduct = (productId = null) => {
+export const likeProduct = productId => {
   console.log('Product_id', productId);
   return axios({
-    url: `${BASE_URL}/${userSubfix}/like`,
+    url: `${BASE_URL}/${userSubfix}/like?productId=${productId}`,
     method: GET,
-    data: {
-      productId,
-    },
+    headers: {Authorization: `${BEARER}${TOKEN}`},
+  });
+};
+
+/**
+ * SET Product unlike
+ * @param {*} productId
+ * @returns
+ */
+export const unlikeProduct = productId => {
+  console.log('Product_id', productId);
+  return axios({
+    url: `${BASE_URL}/${userSubfix}/unlike?productId=${productId}`,
+    method: GET,
+    headers: {Authorization: `${BEARER}${TOKEN}`},
   });
 };
 
@@ -70,10 +83,12 @@ export const likeProduct = (productId = null) => {
  * @returns
  */
 export const getProductFavorite = token => {
-  console.log('Token___', `${BEARER} ${token}`);
+  // console.log('Token___', `${BEARER} ${token}`);
+
   return axios({
     url: `${BASE_URL}/${userSubfix}/getproductfavorite`,
     method: GET,
-    headers: {Authorization: `${BEARER}${token}`},
+    headers: {Authorization: `${BEARER}${TOKEN}`}, //=> Test Token
+    // headers: {Authorization: `${BEARER}${token}`},
   });
 };

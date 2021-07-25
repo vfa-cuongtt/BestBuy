@@ -28,16 +28,24 @@ import ProductIcon from './ProductIcon';
 import HomeScreenStyles from '../../style/HomeScreenStyles';
 import {useNavigation} from '@react-navigation/native';
 import {getAccessToken, removeAccessToken} from '../../utils/storage';
+import {setFavoriteData} from '../../../common/common';
+import productReducer from '../../redux/reducers/productReducer';
 
 const {width: screenWidth} = Dimensions.get('window');
 
 const HomeScreen = () => {
+  const [isReload, setIsReload] = useState(false);
+
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const categoriesData = useSelector(getCategoriesState);
   const productByCategoryData = useSelector(getProductByCategoryState);
   const productListData = useSelector(getProductState);
   const productFavoriteData = useSelector(getProductFavoriteState);
+
+  const [productByCategoryArr, setProductByCategoryArr] = useState(
+    productByCategoryData,
+  );
 
   useEffect(() => {
     dispatch(fetchAllCategory());
@@ -49,8 +57,23 @@ const HomeScreen = () => {
   }, []);
 
   useEffect(() => {
-    console.log('productFavoriteData', productFavoriteData);
-  }, [productFavoriteData]);
+    // console.log('productFavoriteData', productFavoriteData.productsFavorite);
+    const favorite = productFavoriteData.productsFavorite;
+    const productByCategoryArr = setFavoriteData(
+      favorite,
+      productByCategoryData,
+    );
+    const productListDataArr = setFavoriteData(favorite, productListData);
+
+    console.log('Product list__', productListDataArr);
+
+    setProductByCategoryArr(productByCategoryArr);
+    console.log('Test___', productReducer.state);
+
+    setIsReload(true);
+
+    console.log('Test productByCategoryData', productByCategoryArr);
+  }, [productFavoriteData, productByCategoryData, productListData]);
 
   const _renderCategoriesItem = ({item}) => {
     return <CategoriesItem categories={item} />;
@@ -59,7 +82,12 @@ const HomeScreen = () => {
     return <ProductItem product={item} />;
   };
   const _renderAllProductItem = ({item}) => {
-    return <ProductIcon product={item} />;
+    return (
+      <ProductIcon
+        product={item}
+        favoriteArr={productFavoriteData.productsFavorite}
+      />
+    );
   };
   const showAll = () => {
     navigation.navigate('ListItem');
@@ -88,10 +116,11 @@ const HomeScreen = () => {
               horizontal={true}
               numColumns={1}
               keyExtractor={(item, index) => `${item.name}_${item.index}`}
-              data={productByCategoryData}
+              data={productByCategoryArr}
               renderItem={_renderProductByCategoriesItem}
               snapToInterval={screenWidth - 45}
               decelerationRate="fast"
+              extraData={isReload}
             />
           </View>
         </View>
