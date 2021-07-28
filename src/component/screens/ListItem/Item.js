@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   Text,
   StyleSheet,
@@ -11,12 +11,22 @@ import AntIcon from 'react-native-vector-icons/AntDesign';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import ListItemStyles from '../../style/ListItemStyles';
 import {useNavigation} from '@react-navigation/native';
+import {useDispatch} from 'react-redux';
+import {
+  setProductLiked,
+  setUnlikeProduct,
+  fetchProductFavorite,
+} from '../../redux/actions/productAction';
 
 const ProductItem = props => {
+  const {image, price, name, liked, id} = props.product.item;
+  const dispatch = useDispatch();
+  const [isLiked, setIsLiked] = useState(liked);
+
   const navigation = useNavigation();
-  const {image, price, name} = props.product.item;
+
   useEffect(() => {
-    console.log('product_CuongTT_ProductItem', props.product.item);
+    // console.log('ProductItem_props', props.product.item);
   }, [props]);
 
   const onPressGetId = data => {
@@ -24,11 +34,24 @@ const ProductItem = props => {
     navigation.navigate('DetailScreen', {data});
   };
 
+  const onPressLikeProduct = async id => {
+    console.log('product_ID', id, isLiked);
+    if (isLiked) {
+      console.log('unlike');
+      await dispatch(setUnlikeProduct(id));
+    } else {
+      console.log('like');
+      await dispatch(setProductLiked(id));
+    }
+    dispatch(fetchProductFavorite());
+    setIsLiked(!isLiked);
+  };
+
   return (
     <View style={ListItemStyles.productItem}>
       <View style={ListItemStyles.productHeader}>
-        <TouchableOpacity>
-          <AntIcon name="hearto" size={20} />
+        <TouchableOpacity onPress={() => onPressLikeProduct(id)}>
+          <AntIcon name={isLiked ? 'heart' : 'hearto'} size={20} />
         </TouchableOpacity>
       </View>
 

@@ -44,6 +44,7 @@ const HomeScreen = () => {
   const productFavoriteData = useSelector(getProductFavoriteState);
 
   const [productArr, setProductArr] = useState(productListData);
+  const [allItem, setAllItem] = useState(productListData);
 
   useEffect(() => {
     dispatch(fetchAllCategory());
@@ -74,7 +75,7 @@ const HomeScreen = () => {
     });
 
     console.log('Index_useEffect_tempArr', tempArr);
-
+    setAllItem(_productListDataArr);
     setProductArr(tempArr);
   };
 
@@ -108,15 +109,11 @@ const HomeScreen = () => {
     return <ProductItem product={item} />;
   };
   const _renderAllProductItem = ({item}) => {
-    return (
-      <ProductIcon
-        product={item}
-        favoriteArr={productFavoriteData.productsFavorite}
-      />
-    );
+    return <ProductIcon product={item} />;
   };
   const showAll = () => {
-    navigation.navigate('ListItem');
+    console.log('INDEX____ShowAll', allItem);
+    navigation.navigate('ListItem', {allItem});
   };
   return (
     <SafeAreaView style={HomeScreenStyles.areaView}>
@@ -164,7 +161,7 @@ const HomeScreen = () => {
               horizontal={true}
               numColumns={1}
               keyExtractor={(item, index) => `${item.name}_${item.index}`}
-              data={productListData}
+              data={productArr}
               renderItem={_renderAllProductItem}
               snapToInterval={110}
               decelerationRate="fast"
