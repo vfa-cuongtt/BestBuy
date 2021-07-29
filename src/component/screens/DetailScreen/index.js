@@ -24,6 +24,7 @@ const DetailScreen = props => {
   const dispatch = useDispatch();
   const {data, title, size} = props.route.params;
   const [liked, setLiked] = useState(data.liked);
+  const [productSize, setProductSize] = useState();
 
   useEffect(() => {
     console.log('DataDetail', data);
@@ -42,11 +43,24 @@ const DetailScreen = props => {
     setLiked(!islike);
   };
 
+  const onPressGetSize = item => {
+    setProductSize(item);
+  };
+
   const _renderSize = ({item}) => {
     return (
-      <TouchableOpacity>
-        <View style={DetailScreenStyles.size}>
-          <Text>{item}</Text>
+      <TouchableOpacity
+        onPress={() => {
+          onPressGetSize(item);
+        }}>
+        <View
+          style={[
+            DetailScreenStyles.size,
+            productSize === item && DetailScreenStyles.active,
+          ]}>
+          <Text style={productSize === item && GlobalStyles.textWhite}>
+            {item}
+          </Text>
         </View>
       </TouchableOpacity>
     );

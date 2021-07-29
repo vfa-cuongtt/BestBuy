@@ -77,6 +77,9 @@ const DetailScreenStyles = StyleSheet.create({
     marginHorizontal: 9,
     marginVertical: 5,
   },
+  active: {
+    backgroundColor: 'black',
+  },
   blockDescription: {
     // backgroundColor: 'red',
     paddingTop: 10,
