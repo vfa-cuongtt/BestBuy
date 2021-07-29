@@ -14,6 +14,9 @@ const GlobalStyles = StyleSheet.create({
   textWhite: {
     color: 'white',
   },
+  textBold: {
+    fontWeight: 'bold',
+  },
 });
 
 export default GlobalStyles;

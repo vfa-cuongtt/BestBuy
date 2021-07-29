@@ -7,6 +7,7 @@ import SearchScreen from '../screens/SearchScreen';
 import HomeScreen from '../screens/HomeScreen';
 import EntypoIcon from 'react-native-vector-icons/Entypo';
 import RootTabStyles from '../style/RootTabStyles';
+import OrderScreen from '../screens/OrderScreen/index';
 
 const Tab = createBottomTabNavigator();
 
@@ -32,6 +33,9 @@ const RootTab = () => {
         case 'HomeScreen':
           iconName = 'home';
           break;
+        case 'OrderScreen':
+          iconName = 'shopping-bag';
+          break;
         case 'SettingScreen':
           iconName = 'dots-three-vertical';
           break;
@@ -55,6 +59,7 @@ const RootTab = () => {
   return (
     <Tab.Navigator tabBarOptions={tabBarOptions} screenOptions={screenOptions}>
       <Tab.Screen name="HomeScreen" component={HomeScreen} />
+      <Tab.Screen name="OrderScreen" component={OrderScreen} />
       <Tab.Screen name="SettingScreen" component={SettingScreen} />
     </Tab.Navigator>
   );

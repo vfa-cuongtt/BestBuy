@@ -8,6 +8,7 @@ import {
   likeProduct,
   getProductFavorite,
   unlikeProduct,
+  orderProduct,
 } from '../../api/productApi';
 
 import {
@@ -17,8 +18,9 @@ import {
   GET_PRODUCT_LIKED,
   SET_PRODUCT_LIKED,
   GET_PRODUCT_FAVORITE,
+  ORDER_PRODUCT,
 } from '../../utils/env';
-import {getAccessToken} from '../../utils/storage';
+import {getAccessToken, getEmail} from '../../utils/storage';
 
 export const fetchCategoryDataSuccess = payload => ({
   type: CATEGORY_SUCCESS,
@@ -38,6 +40,10 @@ export const getProductLikedSuccess = payload => ({
 });
 export const getProductFavoriteSuccess = payload => ({
   type: GET_PRODUCT_FAVORITE,
+  payload,
+});
+export const orderProductSuccess = payload => ({
+  type: ORDER_PRODUCT,
   payload,
 });
 
@@ -127,4 +133,15 @@ export const fetchProductFavorite = () => {
   };
 };
 
-export const fetchLikeProduct = productId => {};
+export const fetchOtherProduct = orderArr => {
+  return async dispatch => {
+    try {
+      let email = await getEmail();
+      const result = await orderProduct(orderArr, email);
+      console.log('fetchProductFavorite__result', result.data);
+      // dispatch(orderProductSuccess());
+    } catch (error) {
+      console.log('ERROR', error);
+    }
+  };
+};

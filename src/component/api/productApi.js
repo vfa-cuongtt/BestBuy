@@ -92,3 +92,14 @@ export const getProductFavorite = token => {
     // headers: {Authorization: `${BEARER}${token}`},
   });
 };
+
+export const orderProduct = (orderArr, email) => {
+  return axios({
+    url: `${BASE_URL}/${userSubfix}/`,
+    method: POST,
+    data: {
+      orderDetail: orderArr,
+      email: email,
+    },
+  });
+};

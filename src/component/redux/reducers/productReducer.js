@@ -6,12 +6,14 @@ import {
   GET_PRODUCT_LIKED,
   SET_PRODUCT_LIKED,
   GET_PRODUCT_FAVORITE,
+  ORDER_PRODUCT,
 } from '../../utils/env';
 const initialState = {
   categoriesItem: [],
   productListItem: [],
   productByCategory: [],
   productFavorite: [],
+  orderProduct: [],
 };
 
 const productReducer = (state = {...initialState}, action) => {
@@ -28,6 +30,8 @@ const productReducer = (state = {...initialState}, action) => {
     case GET_PRODUCT_FAVORITE:
       state.productFavorite = action.payload;
       return {...state};
+    case ORDER_PRODUCT:
+      state.orderProduct = action.payload;
     default:
       return {...state};
   }
