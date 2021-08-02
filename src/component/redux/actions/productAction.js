@@ -42,7 +42,7 @@ export const getProductFavoriteSuccess = payload => ({
   type: GET_PRODUCT_FAVORITE,
   payload,
 });
-export const orderProductSuccess = payload => ({
+export const setProductOrder = payload => ({
   type: ORDER_PRODUCT,
   payload,
 });
@@ -139,7 +139,25 @@ export const fetchOtherProduct = orderArr => {
       let email = await getEmail();
       const result = await orderProduct(orderArr, email);
       console.log('fetchProductFavorite__result', result.data);
-      // dispatch(orderProductSuccess());
+    } catch (error) {
+      console.log('ERROR', error);
+    }
+  };
+};
+
+export const setProductToBag = product => {
+  return async dispatch => {
+    try {
+      // console.log('setProductToBag', product);
+      let order = {
+        productId: product.id,
+        quantity: 1,
+        image: product.image,
+        name: product.name,
+        price: product.price,
+      };
+      console.log('setProductToBag', order);
+      dispatch(setProductOrder(order));
     } catch (error) {
       console.log('ERROR', error);
     }

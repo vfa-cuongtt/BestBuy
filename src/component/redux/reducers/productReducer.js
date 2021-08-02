@@ -31,7 +31,22 @@ const productReducer = (state = {...initialState}, action) => {
       state.productFavorite = action.payload;
       return {...state};
     case ORDER_PRODUCT:
-      state.orderProduct = action.payload;
+      if (state.orderProduct.length) {
+        const productInBagIndex = state.orderProduct.findIndex(
+          item => item.productId === action.payload.productId,
+        );
+        console.log('productInBagIndex_', productInBagIndex);
+        if (productInBagIndex >= 0) {
+          state.orderProduct[productInBagIndex].quantity =
+            state.orderProduct[productInBagIndex].quantity + 1;
+        } else {
+          state.orderProduct.push(action.payload);
+        }
+      } else {
+        state.orderProduct.push(action.payload);
+      }
+
+      console.log('state.orderProduct', state.orderProduct);
     default:
       return {...state};
   }
