@@ -77,6 +77,9 @@ const DetailScreenStyles = StyleSheet.create({
     marginHorizontal: 9,
     marginVertical: 5,
   },
+  active: {
+    backgroundColor: 'black',
+  },
   blockDescription: {
     // backgroundColor: 'red',
     paddingTop: 10,
@@ -90,6 +93,22 @@ const DetailScreenStyles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: 15,
     borderRadius: 8,
+  },
+  modal: {
+    flex: 1 / 7,
+    backgroundColor: 'white',
+    borderRadius: 8,
+    paddingVertical: 10,
+    alignItems: 'center',
+    borderColor: 'rgba(0, 0, 0, 0.1)',
+  },
+  modalContainer: {
+    height: '50%',
+    alignItems: 'center',
+  },
+  modalButton: {
+    width: '40%',
+    height: '50%',
   },
 });
 export default DetailScreenStyles;

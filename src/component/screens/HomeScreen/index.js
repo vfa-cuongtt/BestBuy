@@ -59,12 +59,12 @@ const HomeScreen = () => {
   const prepareData = async () => {
     const favorite = productFavoriteData.productsFavorite;
 
-    console.log('Index_productListData', productListData);
+    // console.log('Index_productListData', productListData);
     const _productListDataArr = await setFavoriteData(
       favorite,
       productListData,
     );
-    console.log('Index_productByCategoryData', _productListDataArr);
+    // console.log('Index_productByCategoryData', _productListDataArr);
 
     const tempArr = _productListDataArr.filter(item => {
       return (

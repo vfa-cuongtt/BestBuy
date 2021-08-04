@@ -10,3 +10,6 @@ export const getProductByCategoryState = state => {
 export const getProductFavoriteState = state => {
   return state.productReducer.productFavorite;
 };
+export const getProductInBagState = state => {
+  return state.productReducer.orderProduct;
+};

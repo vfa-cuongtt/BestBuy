@@ -14,6 +14,12 @@ const GlobalStyles = StyleSheet.create({
   textWhite: {
     color: 'white',
   },
+  textBold: {
+    fontWeight: 'bold',
+  },
+  fn20: {
+    fontSize: 17,
+  },
 });
 
 export default GlobalStyles;

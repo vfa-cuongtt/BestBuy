@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   Image,
   FlatList,
+  Button,
 } from 'react-native';
 import {BackgroundView} from '../../component';
 import GlobalStyles from '../../style/GlobalStyles';
@@ -17,13 +18,19 @@ import {
   setProductLiked,
   setUnlikeProduct,
   fetchProductFavorite,
+  setProductToBag,
 } from '../../redux/actions/productAction';
 import {useDispatch, useSelector} from 'react-redux';
+import {useNavigation} from '@react-navigation/native';
+import Modal from 'react-native-modal';
 
 const DetailScreen = props => {
   const dispatch = useDispatch();
   const {data, title, size} = props.route.params;
   const [liked, setLiked] = useState(data.liked);
+  const [productSize, setProductSize] = useState();
+  const [isDisplay, seIsDisplay] = useState(false);
+  const navigation = useNavigation();
 
   useEffect(() => {
     console.log('DataDetail', data);
@@ -42,11 +49,34 @@ const DetailScreen = props => {
     setLiked(!islike);
   };
 
+  const onPressGetSize = item => {
+    setProductSize(item);
+  };
+
+  const addProductToBag = item => {
+    // navigation.navigate('OrderScreen', item);
+    dispatch(setProductToBag(item));
+    seIsDisplay(true);
+  };
+
+  const closeModal = () => {
+    seIsDisplay(!isDisplay);
+  };
+
   const _renderSize = ({item}) => {
     return (
-      <TouchableOpacity>
-        <View style={DetailScreenStyles.size}>
-          <Text>{item}</Text>
+      <TouchableOpacity
+        onPress={() => {
+          onPressGetSize(item);
+        }}>
+        <View
+          style={[
+            DetailScreenStyles.size,
+            productSize === item && DetailScreenStyles.active,
+          ]}>
+          <Text style={productSize === item && GlobalStyles.textWhite}>
+            {item}
+          </Text>
         </View>
       </TouchableOpacity>
     );
@@ -55,6 +85,36 @@ const DetailScreen = props => {
   return (
     <SafeAreaView style={[GlobalStyles.areaView]}>
       <BackgroundView>
+        <Modal
+          isVisible={isDisplay}
+          animationInTiming={1000}
+          animationOutTiming={1000}
+          backdropTransitionInTiming={800}
+          backdropTransitionOutTiming={800}
+          onBackdropPress={closeModal}>
+          <View style={DetailScreenStyles.modal}>
+            <View style={DetailScreenStyles.modalContainer}>
+              <Text style={[GlobalStyles.fn20, GlobalStyles.textBold]}>
+                The product has been added to the bag
+              </Text>
+            </View>
+
+            <View style={DetailScreenStyles.modalButton}>
+              <TouchableOpacity onPress={closeModal}>
+                <View style={DetailScreenStyles.button}>
+                  <Text
+                    style={[
+                      DetailScreenStyles.textSize,
+                      GlobalStyles.textWhite,
+                    ]}>
+                    OK
+                  </Text>
+                </View>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </Modal>
+
         <View style={DetailScreenStyles.backView}>
           <View style={DetailScreenStyles.iconBackView}>
             <TouchableOpacity onPress={() => props.navigation.goBack()}>
@@ -112,7 +172,10 @@ const DetailScreen = props => {
         </View>
 
         <View style={DetailScreenStyles.blockButton}>
-          <TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              addProductToBag(data);
+            }}>
             <View style={DetailScreenStyles.button}>
               <Text
                 style={[DetailScreenStyles.textSize, GlobalStyles.textWhite]}>

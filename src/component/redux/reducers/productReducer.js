@@ -6,12 +6,14 @@ import {
   GET_PRODUCT_LIKED,
   SET_PRODUCT_LIKED,
   GET_PRODUCT_FAVORITE,
+  ORDER_PRODUCT,
 } from '../../utils/env';
 const initialState = {
   categoriesItem: [],
   productListItem: [],
   productByCategory: [],
   productFavorite: [],
+  orderProduct: [],
 };
 
 const productReducer = (state = {...initialState}, action) => {
@@ -28,6 +30,23 @@ const productReducer = (state = {...initialState}, action) => {
     case GET_PRODUCT_FAVORITE:
       state.productFavorite = action.payload;
       return {...state};
+    case ORDER_PRODUCT:
+      if (state.orderProduct.length) {
+        const productInBagIndex = state.orderProduct.findIndex(
+          item => item.productId === action.payload.productId,
+        );
+        console.log('productInBagIndex_', productInBagIndex);
+        if (productInBagIndex >= 0) {
+          state.orderProduct[productInBagIndex].quantity =
+            state.orderProduct[productInBagIndex].quantity + 1;
+        } else {
+          state.orderProduct.push(action.payload);
+        }
+      } else {
+        state.orderProduct.push(action.payload);
+      }
+
+      console.log('state.orderProduct', state.orderProduct);
     default:
       return {...state};
   }
