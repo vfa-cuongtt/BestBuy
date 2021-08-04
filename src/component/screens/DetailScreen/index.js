@@ -64,7 +64,6 @@ const DetailScreen = props => {
   };
 
   const _renderSize = ({item}) => {
-    console.log('_renderSize', item);
     return (
       <TouchableOpacity
         onPress={() => {
