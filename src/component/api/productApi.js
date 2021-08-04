@@ -95,7 +95,7 @@ export const getProductFavorite = token => {
 
 export const orderProduct = (orderArr, email) => {
   return axios({
-    url: `${BASE_URL}/${userSubfix}/`,
+    url: `${BASE_URL}/${userSubfix}/order`,
     method: POST,
     data: {
       orderDetail: orderArr,

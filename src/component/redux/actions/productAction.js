@@ -137,8 +137,10 @@ export const fetchOtherProduct = orderArr => {
   return async dispatch => {
     try {
       let email = await getEmail();
+      console.log('orderArr', orderArr);
+
       const result = await orderProduct(orderArr, email);
-      console.log('fetchProductFavorite__result', result.data);
+      console.log('fetchOtherProduct_result', result.data);
     } catch (error) {
       console.log('ERROR', error);
     }
