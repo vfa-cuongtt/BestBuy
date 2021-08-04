@@ -28,7 +28,7 @@ const DetailScreen = props => {
   const dispatch = useDispatch();
   const {data, title, size} = props.route.params;
   const [liked, setLiked] = useState(data.liked);
-  const [productSize, setProductSize] = useState();
+  const [productSize, setProductSize] = useState(36);
   const [isDisplay, seIsDisplay] = useState(false);
   const navigation = useNavigation();
 
@@ -64,6 +64,7 @@ const DetailScreen = props => {
   };
 
   const _renderSize = ({item}) => {
+    console.log('_renderSize', item);
     return (
       <TouchableOpacity
         onPress={() => {
