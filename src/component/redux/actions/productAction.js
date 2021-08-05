@@ -9,6 +9,7 @@ import {
   getProductFavorite,
   unlikeProduct,
   orderProduct,
+  getProfile,
 } from '../../api/productApi';
 
 import {
@@ -19,6 +20,7 @@ import {
   SET_PRODUCT_LIKED,
   GET_PRODUCT_FAVORITE,
   ORDER_PRODUCT,
+  GET_PROFILE_SUCCESS,
 } from '../../utils/env';
 import {getAccessToken, getEmail} from '../../utils/storage';
 
@@ -44,6 +46,10 @@ export const getProductFavoriteSuccess = payload => ({
 });
 export const setProductOrder = payload => ({
   type: ORDER_PRODUCT,
+  payload,
+});
+export const getProfileSuccess = payload => ({
+  type: GET_PROFILE_SUCCESS,
   payload,
 });
 
@@ -160,6 +166,20 @@ export const setProductToBag = product => {
       };
       console.log('setProductToBag', order);
       dispatch(setProductOrder(order));
+    } catch (error) {
+      console.log('ERROR', error);
+    }
+  };
+};
+
+export const fetchProfile = () => {
+  // getProfile;
+  return async dispatch => {
+    try {
+      let token = await getAccessToken();
+      // console.log('fetchProfile_token', token);
+      const result = await getProfile(token);
+      dispatch(getProfileSuccess(result.data.content));
     } catch (error) {
       console.log('ERROR', error);
     }

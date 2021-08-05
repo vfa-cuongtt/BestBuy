@@ -85,6 +85,7 @@ const LoginScreen = ({navigation}) => {
                 <TextInput
                   style={loginStyles.textInput}
                   placeholder="example@gmail.com"
+                  autoCapitalize="none"
                   value={values.email}
                   onChangeText={handleChange('email')}
                 />
@@ -97,6 +98,7 @@ const LoginScreen = ({navigation}) => {
                 <TextInput
                   style={loginStyles.textInput}
                   placeholder="Password"
+                  autoCapitalize="none"
                   value={values.password}
                   onChangeText={handleChange('password')}
                 />

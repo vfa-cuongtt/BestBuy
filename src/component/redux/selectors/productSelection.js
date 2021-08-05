@@ -13,3 +13,6 @@ export const getProductFavoriteState = state => {
 export const getProductInBagState = state => {
   return state.productReducer.orderProduct;
 };
+export const getUserInfo = state => {
+  return state.productReducer.userProfile;
+};

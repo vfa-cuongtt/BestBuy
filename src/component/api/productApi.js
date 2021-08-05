@@ -103,3 +103,12 @@ export const orderProduct = (orderArr, email) => {
     },
   });
 };
+
+export const getProfile = () => {
+  return axios({
+    url: `${BASE_URL}/${userSubfix}/getProfile`,
+    method: POST,
+    headers: {Authorization: `${BEARER}${TOKEN}`}, //=> Test Token
+    // headers: {Authorization: `${BEARER}${token}`},
+  });
+};
