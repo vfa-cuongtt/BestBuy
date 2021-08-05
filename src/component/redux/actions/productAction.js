@@ -10,6 +10,7 @@ import {
   unlikeProduct,
   orderProduct,
   getProfile,
+  changePassword,
 } from '../../api/productApi';
 
 import {
@@ -180,6 +181,19 @@ export const fetchProfile = () => {
       // console.log('fetchProfile_token', token);
       const result = await getProfile(token);
       dispatch(getProfileSuccess(result.data.content));
+    } catch (error) {
+      console.log('ERROR', error);
+    }
+  };
+};
+
+export const resetPassword = pass => {
+  console.log('resetPassword', pass);
+  return async dispatch => {
+    try {
+      let token = await getAccessToken();
+      const result = await changePassword(pass, token);
+      console.log('resetPassword', result);
     } catch (error) {
       console.log('ERROR', error);
     }

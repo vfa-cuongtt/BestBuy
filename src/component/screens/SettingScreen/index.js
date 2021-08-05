@@ -53,9 +53,6 @@ const Setting = () => {
           </Text>
         </View>
         <View style={SettingScreenStyles.blockContainer}>
-          {/* <TouchableOpacity onPress={() => onPressLogout()}>
-            <Text>Logout</Text>
-          </TouchableOpacity> */}
           <View style={SettingScreenStyles.blockUserInfo}>
             <View style={SettingScreenStyles.blockAvatar}>
               <Image
@@ -77,7 +74,8 @@ const Setting = () => {
             </View>
           </View>
           <View style={SettingScreenStyles.blockSetting}>
-            <TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => navigation.navigate('ChangePassword')}>
               <View style={SettingScreenStyles.blockTitle}>
                 <AntIcon name="idcard" size={30} />
                 <View style={SettingScreenStyles.right}>
@@ -111,5 +109,4 @@ const Setting = () => {
   );
 };
 
-const styles = StyleSheet.create({});
 export default Setting;

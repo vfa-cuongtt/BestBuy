@@ -8,6 +8,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import RootTab from './rootTab';
 import DetailScreen from '../screens/DetailScreen/index';
 import ListItem from '../screens/ListItem/index';
+import ChangePassword from '../screens/SettingScreen/ChangePassword';
 
 const Stack = createStackNavigator();
 
@@ -57,6 +58,7 @@ const RootNavigation = () => {
           <Stack.Screen name="HomeScreen" component={HomeScreen} />
           <Stack.Screen name="DetailScreen" component={DetailScreen} />
           <Stack.Screen name="ListItem" component={ListItem} />
+          <Stack.Screen name="ChangePassword" component={ChangePassword} />
         </Stack.Navigator>
         {/* )} */}
       </>

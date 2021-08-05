@@ -27,7 +27,7 @@ const OrderScreen = () => {
   const [itemInBag, setItemInBag] = useState(productInBag);
   const [rerender, setRerender] = useState(false);
   const [priceArr, setPriceArr] = useState([]);
-  const [isDisplay, seIsDisplay] = useState(false);
+  const [isDisplay, setIsDisplay] = useState(false);
 
   const tempArr = [];
 
@@ -68,11 +68,11 @@ const OrderScreen = () => {
   const payProduct = () => {
     console.log('payProduct', itemInBag);
     dispatch(fetchOtherProduct(itemInBag));
-    seIsDisplay(true);
+    setIsDisplay(true);
   };
 
   const closeModal = () => {
-    seIsDisplay(!isDisplay);
+    setIsDisplay(!isDisplay);
   };
 
   console.log('Test Return', itemInBag);
