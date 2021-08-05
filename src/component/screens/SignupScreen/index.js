@@ -62,6 +62,7 @@ const SignupScreen = ({navigation}) => {
                   style={loginStyles.textInput}
                   placeholder="example@gmail.com"
                   value={values.email}
+                  autoCapitalize="none"
                   onChangeText={handleChange('email')}
                 />
                 {errors.email && (
@@ -74,6 +75,7 @@ const SignupScreen = ({navigation}) => {
                   style={loginStyles.textInput}
                   placeholder="********"
                   value={values.password}
+                  autoCapitalize="none"
                   onChangeText={handleChange('password')}
                 />
                 {errors.password && (

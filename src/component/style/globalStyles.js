@@ -17,7 +17,7 @@ const GlobalStyles = StyleSheet.create({
   textBold: {
     fontWeight: 'bold',
   },
-  fn20: {
+  fn17: {
     fontSize: 17,
   },
 });

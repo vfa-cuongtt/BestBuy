@@ -7,6 +7,7 @@ import {
   SET_PRODUCT_LIKED,
   GET_PRODUCT_FAVORITE,
   ORDER_PRODUCT,
+  GET_PROFILE_SUCCESS,
 } from '../../utils/env';
 const initialState = {
   categoriesItem: [],
@@ -14,6 +15,7 @@ const initialState = {
   productByCategory: [],
   productFavorite: [],
   orderProduct: [],
+  userProfile: [],
 };
 
 const productReducer = (state = {...initialState}, action) => {
@@ -45,8 +47,9 @@ const productReducer = (state = {...initialState}, action) => {
       } else {
         state.orderProduct.push(action.payload);
       }
-
-      console.log('state.orderProduct', state.orderProduct);
+      return {...state};
+    case GET_PROFILE_SUCCESS:
+      state.userProfile = action.payload;
     default:
       return {...state};
   }
