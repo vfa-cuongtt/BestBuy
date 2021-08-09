@@ -22,9 +22,9 @@ const RootNavigation = () => {
   useEffect(() => {
     const setAccessTokenToRedux = async () => {
       const accessTokenStorage = await getAccessToken();
-      const isLogin = await getIsLogin();
+      // const isLoginStore = await getIsLogin();
       // setIsLogin(isLogin);
-      // console.log('getIsLogin___', JSON.stringify(isLogin));
+      // console.log('getIsLogin___', JSON.stringify(isLoginStore));
 
       if (accessTokenStorage) {
         dispatch({
@@ -47,20 +47,20 @@ const RootNavigation = () => {
   return (
     <NavigationContainer>
       <>
-        {/* {!isLogin ? (
+        {!isLogin ? (
           <Stack.Navigator headerMode="none">
             <Stack.Screen name="LoginScreen" component={LoginScreen} />
             <Stack.Screen name="SignupScreen" component={SignupScreen} />
           </Stack.Navigator>
-        ) : ( */}
-        <Stack.Navigator headerMode="none">
-          <Stack.Screen name="RootTab" component={RootTab} />
-          <Stack.Screen name="HomeScreen" component={HomeScreen} />
-          <Stack.Screen name="DetailScreen" component={DetailScreen} />
-          <Stack.Screen name="ListItem" component={ListItem} />
-          <Stack.Screen name="ChangePassword" component={ChangePassword} />
-        </Stack.Navigator>
-        {/* )} */}
+        ) : (
+          <Stack.Navigator headerMode="none">
+            <Stack.Screen name="RootTab" component={RootTab} />
+            <Stack.Screen name="HomeScreen" component={HomeScreen} />
+            <Stack.Screen name="DetailScreen" component={DetailScreen} />
+            <Stack.Screen name="ListItem" component={ListItem} />
+            <Stack.Screen name="ChangePassword" component={ChangePassword} />
+          </Stack.Navigator>
+        )}
       </>
     </NavigationContainer>
   );

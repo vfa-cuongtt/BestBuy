@@ -14,6 +14,7 @@ import {
   getAccessToken,
   removeEmail,
   removeIsLogin,
+  setIsLogin,
 } from '../../utils/storage';
 import {useNavigation} from '@react-navigation/native';
 import SettingScreenStyles from '../../style/SettingScreenStyles';
@@ -38,9 +39,11 @@ const Setting = () => {
 
   const onPressLogout = () => {
     removeAccessToken();
-    // removeEmail();
+    setIsLogin('false');
+    removeEmail();
     // removeIsLogin();
     console.log('accessToken', getAccessToken());
+
     // navigation.navigate('LoginScreen');
   };
 

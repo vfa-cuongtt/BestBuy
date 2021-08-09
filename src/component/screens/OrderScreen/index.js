@@ -24,7 +24,7 @@ const OrderScreen = () => {
   const navigation = useNavigation();
   const [totalPrice, settotalPrice] = useState(0);
   const productInBag = useSelector(getProductInBagState);
-  const [itemInBag, setItemInBag] = useState(productInBag);
+  const [itemInBag, setItemInBag] = useState([]);
   const [rerender, setRerender] = useState(false);
   const [priceArr, setPriceArr] = useState([]);
   const [isDisplay, setIsDisplay] = useState(false);
@@ -34,6 +34,7 @@ const OrderScreen = () => {
   useEffect(() => {
     navigation.addListener('focus', () => {
       console.log('OrderScreen_1', productInBag);
+      setItemInBag(productInBag);
       setRerender(!rerender);
     });
   }, [navigation, productInBag, rerender]);
@@ -68,6 +69,8 @@ const OrderScreen = () => {
   const payProduct = () => {
     console.log('payProduct', itemInBag);
     dispatch(fetchOtherProduct(itemInBag));
+    setItemInBag([]);
+    setRerender(!rerender);
     setIsDisplay(true);
   };
 

@@ -8,6 +8,7 @@ import {
   GET_PRODUCT_FAVORITE,
   ORDER_PRODUCT,
   GET_PROFILE_SUCCESS,
+  CLEAR_ITEM,
 } from '../../utils/env';
 const initialState = {
   categoriesItem: [],
@@ -50,6 +51,10 @@ const productReducer = (state = {...initialState}, action) => {
       return {...state};
     case GET_PROFILE_SUCCESS:
       state.userProfile = action.payload;
+      return {...state};
+    case CLEAR_ITEM:
+      state.orderProduct = [];
+      return {...state};
     default:
       return {...state};
   }

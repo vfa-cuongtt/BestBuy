@@ -22,6 +22,7 @@ import {
   GET_PRODUCT_FAVORITE,
   ORDER_PRODUCT,
   GET_PROFILE_SUCCESS,
+  CLEAR_ITEM,
 } from '../../utils/env';
 import {getAccessToken, getEmail} from '../../utils/storage';
 
@@ -51,6 +52,10 @@ export const setProductOrder = payload => ({
 });
 export const getProfileSuccess = payload => ({
   type: GET_PROFILE_SUCCESS,
+  payload,
+});
+export const clearItemInState = payload => ({
+  type: CLEAR_ITEM,
   payload,
 });
 
@@ -106,7 +111,8 @@ export const setProductLiked = id => {
   return async dispatch => {
     try {
       // console.log('setProductLiked', id);
-      const result = await likeProduct(id);
+      let token = await getAccessToken();
+      const result = await likeProduct(id, token);
       console.log('setProductLiked', result.data);
       // fetchProductFavorite();
     } catch (error) {
@@ -118,7 +124,8 @@ export const setProductLiked = id => {
 export const setUnlikeProduct = id => {
   return async dispatch => {
     try {
-      const result = await unlikeProduct(id);
+      let token = await getAccessToken();
+      const result = await unlikeProduct(id, token);
       console.log('setUnlikeProduct', result.data);
     } catch (error) {
       console.log('ERROR', error);
@@ -147,7 +154,11 @@ export const fetchOtherProduct = orderArr => {
       console.log('orderArr', orderArr);
 
       const result = await orderProduct(orderArr, email);
+
       console.log('fetchOtherProduct_result', result.data);
+      if (result.data.statusCode === 200) {
+        dispatch(clearItemInState());
+      }
     } catch (error) {
       console.log('ERROR', error);
     }
