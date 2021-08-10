@@ -1,5 +1,4 @@
 import axios from 'axios';
-import {getAccessToken} from '../utils/storage';
 import {
   BASE_URL,
   productSubfix,
@@ -54,12 +53,13 @@ export const getProductByCategory = id => {
  * @param {*} productId
  * @returns
  */
-export const likeProduct = productId => {
+export const likeProduct = (productId, token) => {
   console.log('Product_id', productId);
   return axios({
     url: `${BASE_URL}/${userSubfix}/like?productId=${productId}`,
     method: GET,
-    headers: {Authorization: `${BEARER}${TOKEN}`},
+    // headers: {Authorization: `${BEARER}${TOKEN}`},
+    headers: {Authorization: `${BEARER}${token}`},
   });
 };
 
@@ -68,12 +68,13 @@ export const likeProduct = productId => {
  * @param {*} productId
  * @returns
  */
-export const unlikeProduct = productId => {
+export const unlikeProduct = (productId, token) => {
   console.log('Product_id', productId);
   return axios({
     url: `${BASE_URL}/${userSubfix}/unlike?productId=${productId}`,
     method: GET,
-    headers: {Authorization: `${BEARER}${TOKEN}`},
+    // headers: {Authorization: `${BEARER}${TOKEN}`},
+    headers: {Authorization: `${BEARER}${token}`},
   });
 };
 
@@ -88,8 +89,8 @@ export const getProductFavorite = token => {
   return axios({
     url: `${BASE_URL}/${userSubfix}/getproductfavorite`,
     method: GET,
-    headers: {Authorization: `${BEARER}${TOKEN}`}, //=> Test Token
-    // headers: {Authorization: `${BEARER}${token}`},
+    // headers: {Authorization: `${BEARER}${TOKEN}`}, //=> Test Token
+    headers: {Authorization: `${BEARER}${token}`},
   });
 };
 
@@ -104,11 +105,23 @@ export const orderProduct = (orderArr, email) => {
   });
 };
 
-export const getProfile = () => {
+export const getProfile = token => {
   return axios({
     url: `${BASE_URL}/${userSubfix}/getProfile`,
     method: POST,
-    headers: {Authorization: `${BEARER}${TOKEN}`}, //=> Test Token
-    // headers: {Authorization: `${BEARER}${token}`},
+    // headers: {Authorization: `${BEARER}${TOKEN}`}, //=> Test Token
+    headers: {Authorization: `${BEARER}${token}`},
+  });
+};
+
+export const changePassword = (pass, token) => {
+  return axios({
+    url: `${BASE_URL}/${userSubfix}/changePassword`,
+    method: POST,
+    // headers: {Authorization: `${BEARER}${TOKEN}`}, //=> Test Token
+    headers: {Authorization: `${BEARER}${token}`},
+    data: {
+      newPassword: pass,
+    },
   });
 };

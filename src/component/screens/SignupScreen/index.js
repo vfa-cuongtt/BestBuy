@@ -34,6 +34,10 @@ const SignupScreen = ({navigation}) => {
       });
   };
 
+  const handleCancel = () => {
+    navigation.navigate('LoginScreen');
+  };
+
   return (
     <SafeAreaView style={loginStyles.areaView}>
       <View style={loginStyles.logoView}>
@@ -91,7 +95,7 @@ const SignupScreen = ({navigation}) => {
                 </TouchableOpacity>
                 <TouchableOpacity
                   style={loginStyles.btnSignUp}
-                  onPress={() => navigation.navigate('LoginScreen')}>
+                  onPress={handleCancel}>
                   <Text>Cancel</Text>
                 </TouchableOpacity>
               </View>

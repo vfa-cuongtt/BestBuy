@@ -14,6 +14,7 @@ import {
   getAccessToken,
   removeEmail,
   removeIsLogin,
+  setIsLogin,
 } from '../../utils/storage';
 import {useNavigation} from '@react-navigation/native';
 import SettingScreenStyles from '../../style/SettingScreenStyles';
@@ -38,9 +39,11 @@ const Setting = () => {
 
   const onPressLogout = () => {
     removeAccessToken();
-    // removeEmail();
+    setIsLogin('false');
+    removeEmail();
     // removeIsLogin();
     console.log('accessToken', getAccessToken());
+
     // navigation.navigate('LoginScreen');
   };
 
@@ -53,9 +56,6 @@ const Setting = () => {
           </Text>
         </View>
         <View style={SettingScreenStyles.blockContainer}>
-          {/* <TouchableOpacity onPress={() => onPressLogout()}>
-            <Text>Logout</Text>
-          </TouchableOpacity> */}
           <View style={SettingScreenStyles.blockUserInfo}>
             <View style={SettingScreenStyles.blockAvatar}>
               <Image
@@ -77,7 +77,8 @@ const Setting = () => {
             </View>
           </View>
           <View style={SettingScreenStyles.blockSetting}>
-            <TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => navigation.navigate('ChangePassword')}>
               <View style={SettingScreenStyles.blockTitle}>
                 <AntIcon name="idcard" size={30} />
                 <View style={SettingScreenStyles.right}>
@@ -111,5 +112,4 @@ const Setting = () => {
   );
 };
 
-const styles = StyleSheet.create({});
 export default Setting;
