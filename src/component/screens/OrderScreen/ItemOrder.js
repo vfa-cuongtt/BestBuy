@@ -7,7 +7,7 @@ import AntIcon from 'react-native-vector-icons/AntDesign';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 const ItemOrder = props => {
-  console.log('ItemOrder__', props.product);
+  // console.log('ItemOrder__', props.product);
   const {productId, name, image, price, quantity} = props.product;
   const [productQuantity, setProductQuantity] = useState(quantity);
   const [productPrice, setProductPrice] = useState(price);
@@ -42,10 +42,14 @@ const ItemOrder = props => {
     setProductPrice(productPrice + price);
   };
 
+  const deleteItem = () => {
+    props.deleteItem(productId);
+  };
+
   return (
     <View style={ItemOrderStyles.item}>
       <View style={ItemOrderStyles.blockTop}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={deleteItem}>
           <AntIcon name="close" size={20} />
         </TouchableOpacity>
       </View>
