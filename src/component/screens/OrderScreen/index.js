@@ -33,7 +33,6 @@ const OrderScreen = () => {
 
   useEffect(() => {
     navigation.addListener('focus', () => {
-      console.log('OrderScreen_1', productInBag);
       setItemInBag(productInBag);
       setRerender(!rerender);
     });
@@ -62,12 +61,19 @@ const OrderScreen = () => {
         totalPrice={(price, id, productQuantity) =>
           setTotalPrice(price, id, productQuantity)
         }
+        deleteItem={id => deleteItem(id)}
       />
     );
   };
 
+  const deleteItem = id => {
+    const index = productInBag.findIndex(item => item.productId === id);
+    productInBag.splice(index, 1);
+    setRerender(!rerender);
+  };
+
   const payProduct = () => {
-    console.log('payProduct', itemInBag);
+    // console.log('payProduct', itemInBag);
     dispatch(fetchOtherProduct(itemInBag));
     setItemInBag([]);
     setRerender(!rerender);
@@ -78,7 +84,7 @@ const OrderScreen = () => {
     setIsDisplay(!isDisplay);
   };
 
-  console.log('Test Return', itemInBag);
+  // console.log('Test Return', itemInBag);
   return (
     <SafeAreaView style={[GlobalStyles.areaView]}>
       <BackgroundView>
