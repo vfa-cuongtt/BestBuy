@@ -39,12 +39,11 @@ const Setting = () => {
 
   const onPressLogout = () => {
     removeAccessToken();
-    setIsLogin('false');
     removeEmail();
-    // removeIsLogin();
-    console.log('accessToken', getAccessToken());
-
-    // navigation.navigate('LoginScreen');
+    dispatch({
+      type: 'SET_ACCESS_TOKEN',
+      payload: null,
+    });
   };
 
   return (

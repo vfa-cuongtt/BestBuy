@@ -13,18 +13,13 @@ import ChangePassword from '../screens/SettingScreen/ChangePassword';
 const Stack = createStackNavigator();
 
 const RootNavigation = () => {
-  const [isLogin, setIsLogin] = useState('false');
-
+  const [isLogin, setIsLogin] = useState(false);
   const accessToken = useSelector(getAccessTokenSelector);
-
   const dispatch = useDispatch();
 
   useEffect(() => {
     const setAccessTokenToRedux = async () => {
       const accessTokenStorage = await getAccessToken();
-      // const isLoginStore = await getIsLogin();
-      // setIsLogin(isLogin);
-      // console.log('getIsLogin___', JSON.stringify(isLoginStore));
 
       if (accessTokenStorage) {
         dispatch({
