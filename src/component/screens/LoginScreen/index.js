@@ -28,24 +28,6 @@ const loginSchema = Yup.object().shape({
   password: Yup.string().required('Required'),
 });
 
-// const setAccessToken = async value => {
-//   try {
-//     await AsyncStorage.setItem('@accessToken', value);
-//   } catch (err) {
-//     console.log(err);
-//   }
-// };
-
-// const getAccessToken = async () => {
-//   try {
-//     const accessToken = await AsyncStorage.getItem('@accessToken');
-//     console.log('accessToken', accessToken);
-//     return accessToken;
-//   } catch (err) {
-//     console.log(err);
-//   }
-// };
-
 const LoginScreen = ({navigation}) => {
   const dispatch = useDispatch();
 
@@ -54,7 +36,6 @@ const LoginScreen = ({navigation}) => {
     userLogin(data)
       .then(res => {
         if (res.data.statusCode === 200) {
-          // console.log('LoginScreen', res.data.content.accessToken);
           const {accessToken, email} = res.data.content;
 
           setAccessToken(accessToken);

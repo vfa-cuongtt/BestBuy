@@ -11,7 +11,6 @@ export const setAccessToken = async value => {
 export const getAccessToken = async () => {
   try {
     const accessToken = await AsyncStorage.getItem('@accessToken');
-    // console.log('accessToken', accessToken);
     return accessToken;
   } catch (err) {
     console.log(err);
@@ -21,7 +20,6 @@ export const getAccessToken = async () => {
 export const removeAccessToken = async () => {
   try {
     const accessToken = await AsyncStorage.removeItem('@accessToken');
-    // console.log('accessToken', accessToken);
     return accessToken;
   } catch (err) {
     console.error(err);
@@ -67,7 +65,6 @@ export const setIsLogin = async value => {
 export const getIsLogin = async () => {
   try {
     const isLogin = await AsyncStorage.getItem('@isLogin');
-    // console.log('TESSST id login', isLogin);
     return isLogin;
   } catch (err) {
     console.log(err);

@@ -168,7 +168,6 @@ export const fetchOtherProduct = orderArr => {
 export const setProductToBag = product => {
   return async dispatch => {
     try {
-      // console.log('setProductToBag', product);
       let order = {
         productId: product.id,
         quantity: 1,
@@ -185,11 +184,9 @@ export const setProductToBag = product => {
 };
 
 export const fetchProfile = () => {
-  // getProfile;
   return async dispatch => {
     try {
       let token = await getAccessToken();
-      // console.log('fetchProfile_token', token);
       const result = await getProfile(token);
       dispatch(getProfileSuccess(result.data.content));
     } catch (error) {
