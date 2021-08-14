@@ -23,6 +23,7 @@ import {fetchProfile} from '../../redux/actions/productAction';
 import {getUserInfo} from '../../redux/selectors/productSelection';
 import AntIcon from 'react-native-vector-icons/AntDesign';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import {SET_ACCESS_TOKEN} from '../../utils/env';
 
 const Setting = () => {
   const navigation = useNavigation();
@@ -41,7 +42,7 @@ const Setting = () => {
     removeAccessToken();
     removeEmail();
     dispatch({
-      type: 'SET_ACCESS_TOKEN',
+      type: SET_ACCESS_TOKEN,
       payload: null,
     });
   };

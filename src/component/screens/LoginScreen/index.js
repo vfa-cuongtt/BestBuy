@@ -17,11 +17,10 @@ import {
   setEmail,
   setIsLogin,
 } from '../../utils/storage';
-import {LoginButton} from 'react-native-fbsdk-next';
 import {useDispatch} from 'react-redux';
 import {logo} from '../../../assets';
 import {Text} from '../../component';
-import {NavigationContainer} from '@react-navigation/native';
+import {SET_ACCESS_TOKEN} from '../../utils/env';
 
 const loginSchema = Yup.object().shape({
   email: Yup.string().email('Invalid email').required('Required'),
@@ -42,7 +41,7 @@ const LoginScreen = ({navigation}) => {
           setEmail(email);
           setIsLogin('true');
           dispatch({
-            type: 'SET_ACCESS_TOKEN',
+            type: SET_ACCESS_TOKEN,
             payload: accessToken,
           });
         }

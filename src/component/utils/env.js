@@ -13,6 +13,8 @@ export const PRODUCT_FAVORITE = 'PRODUCT_FAVORITE';
 export const ORDER_PRODUCT = 'ORDER_PRODUCT';
 export const GET_PROFILE_SUCCESS = 'GET_PROFILE_SUCCESS';
 export const CLEAR_ITEM = 'CLEAR_ITEM';
+export const SET_ACCESS_TOKEN = 'SET_ACCESS_TOKEN';
+export const LOGOUT = 'LOGOUT';
 export const ERROR = 'ERROR';
 export const BEARER = 'Bearer ';
 

@@ -9,6 +9,7 @@ import RootTab from './rootTab';
 import DetailScreen from '../screens/DetailScreen/index';
 import ListItem from '../screens/ListItem/index';
 import ChangePassword from '../screens/SettingScreen/ChangePassword';
+import {SET_ACCESS_TOKEN} from '../utils/env';
 
 const Stack = createStackNavigator();
 
@@ -23,7 +24,7 @@ const RootNavigation = () => {
 
       if (accessTokenStorage) {
         dispatch({
-          type: 'SET_ACCESS_TOKEN',
+          type: SET_ACCESS_TOKEN,
           payload: accessTokenStorage,
         });
       }

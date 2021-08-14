@@ -27,9 +27,9 @@ import AntIcon from 'react-native-vector-icons/AntDesign';
 import ProductIcon from './ProductIcon';
 import HomeScreenStyles from '../../style/HomeScreenStyles';
 import {useNavigation} from '@react-navigation/native';
-import {getAccessToken, removeAccessToken} from '../../utils/storage';
 import {setFavoriteData} from '../../../common/common';
-import productReducer from '../../redux/reducers/productReducer';
+import Modal from 'react-native-modal';
+import LottieView from 'lottie-react-native';
 
 const {width: screenWidth} = Dimensions.get('window');
 
@@ -45,6 +45,7 @@ const HomeScreen = () => {
 
   const [productArr, setProductArr] = useState(productListData);
   const [allItem, setAllItem] = useState(productListData);
+  const [isDisplay, setIsDisplay] = useState(true);
 
   useEffect(() => {
     dispatch(fetchAllCategory());
@@ -58,13 +59,10 @@ const HomeScreen = () => {
 
   const prepareData = async () => {
     const favorite = productFavoriteData.productsFavorite;
-
-    // console.log('Index_productListData', productListData);
     const _productListDataArr = await setFavoriteData(
       favorite,
       productListData,
     );
-    // console.log('Index_productByCategoryData', _productListDataArr);
 
     const tempArr = _productListDataArr.filter(item => {
       return (
@@ -77,6 +75,7 @@ const HomeScreen = () => {
     console.log('Index_useEffect_tempArr', tempArr);
     setAllItem(_productListDataArr);
     setProductArr(tempArr);
+    setIsDisplay(false);
   };
 
   const onTabPress = id => {
@@ -118,6 +117,20 @@ const HomeScreen = () => {
   return (
     <SafeAreaView style={HomeScreenStyles.areaView}>
       <BackgroundView>
+        <Modal isVisible={isDisplay}>
+          <View
+            style={{
+              flex: 1,
+              alignItems: 'center',
+            }}>
+            <LottieView
+              source={require('../../../assets/loading/loading4.json')}
+              autoPlay
+              loop
+            />
+          </View>
+        </Modal>
+
         <View style={HomeScreenStyles.topView}>
           <Text style={{fontSize: 40, fontWeight: 'bold', color: 'white'}}>
             Athletic Shoes Collection

@@ -18,11 +18,11 @@ import {
   PRODUCT_SUCCESS,
   PRODUCT_BY_CATEGORY_SUCCESS,
   GET_PRODUCT_LIKED,
-  SET_PRODUCT_LIKED,
   GET_PRODUCT_FAVORITE,
   ORDER_PRODUCT,
   GET_PROFILE_SUCCESS,
   CLEAR_ITEM,
+  SET_ACCESS_TOKEN,
 } from '../../utils/env';
 import {getAccessToken, getEmail} from '../../utils/storage';
 
@@ -66,6 +66,10 @@ export const fetchAllCategory = () => {
       dispatch(fetchCategoryDataSuccess(result.data.content));
     } catch (error) {
       console.log('err', error);
+      dispatch({
+        type: SET_ACCESS_TOKEN,
+        payload: null,
+      });
     }
   };
 };
@@ -86,6 +90,10 @@ export const fetchAllProduct = () => {
       dispatch(fetchAllProductDataSuccess(arr));
     } catch (error) {
       console.log('err', error);
+      dispatch({
+        type: SET_ACCESS_TOKEN,
+        payload: null,
+      });
     }
   };
 };
@@ -103,6 +111,10 @@ export const fetchProductByCategory = id => {
       dispatch(fetchProductByCategorySuccess(arr));
     } catch (error) {
       console.log('err', error);
+      dispatch({
+        type: SET_ACCESS_TOKEN,
+        payload: null,
+      });
     }
   };
 };
@@ -117,6 +129,10 @@ export const setProductLiked = id => {
       // fetchProductFavorite();
     } catch (error) {
       console.log('ERROR', error);
+      dispatch({
+        type: SET_ACCESS_TOKEN,
+        payload: null,
+      });
     }
   };
 };
@@ -129,6 +145,10 @@ export const setUnlikeProduct = id => {
       console.log('setUnlikeProduct', result.data);
     } catch (error) {
       console.log('ERROR', error);
+      dispatch({
+        type: SET_ACCESS_TOKEN,
+        payload: null,
+      });
     }
   };
 };
@@ -143,6 +163,10 @@ export const fetchProductFavorite = () => {
       dispatch(getProductFavoriteSuccess(result.data.content));
     } catch (error) {
       console.log('ERROR', error);
+      dispatch({
+        type: SET_ACCESS_TOKEN,
+        payload: null,
+      });
     }
   };
 };
@@ -161,6 +185,10 @@ export const fetchOtherProduct = orderArr => {
       }
     } catch (error) {
       console.log('ERROR', error);
+      dispatch({
+        type: SET_ACCESS_TOKEN,
+        payload: null,
+      });
     }
   };
 };
@@ -179,6 +207,10 @@ export const setProductToBag = product => {
       dispatch(setProductOrder(order));
     } catch (error) {
       console.log('ERROR', error);
+      dispatch({
+        type: SET_ACCESS_TOKEN,
+        payload: null,
+      });
     }
   };
 };
@@ -191,6 +223,10 @@ export const fetchProfile = () => {
       dispatch(getProfileSuccess(result.data.content));
     } catch (error) {
       console.log('ERROR', error);
+      dispatch({
+        type: SET_ACCESS_TOKEN,
+        payload: null,
+      });
     }
   };
 };
@@ -204,6 +240,10 @@ export const resetPassword = pass => {
       console.log('resetPassword', result);
     } catch (error) {
       console.log('ERROR', error);
+      dispatch({
+        type: SET_ACCESS_TOKEN,
+        payload: null,
+      });
     }
   };
 };
