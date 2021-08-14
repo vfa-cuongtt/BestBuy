@@ -47,11 +47,11 @@ const OrderScreen = () => {
       }
     });
 
-    // tempArr.push(price);
+    tempArr.push(price);
     // setPriceArr(price);
-    // console.log('temp', tempArr);
+    console.log('temp', tempArr);
 
-    // settotalPrice(price);
+    settotalPrice(price);
   };
 
   const _renderItem = ({item}) => {
@@ -69,6 +69,7 @@ const OrderScreen = () => {
   const deleteItem = id => {
     const index = productInBag.findIndex(item => item.productId === id);
     productInBag.splice(index, 1);
+    settotalPrice(0);
     setRerender(!rerender);
   };
 
@@ -134,8 +135,8 @@ const OrderScreen = () => {
         </View>
         <View style={OrderScreenStyle.blockBottom}>
           <View style={OrderScreenStyle.payTextView}>
-            <Text style={[OrderScreenStyle.textSize]}>Total: {totalPrice}</Text>
-            <MaterialIcons name="attach-money" size={18} />
+            {/* <Text style={[OrderScreenStyle.textSize]}>Total: {totalPrice}</Text>
+            <MaterialIcons name="attach-money" size={18} /> */}
           </View>
           <View style={OrderScreenStyle.buttonView}>
             <TouchableOpacity onPress={payProduct}>
