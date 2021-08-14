@@ -80,6 +80,7 @@ const SignupScreen = ({navigation}) => {
                   placeholder="********"
                   value={values.password}
                   autoCapitalize="none"
+                  secureTextEntry={true}
                   onChangeText={handleChange('password')}
                 />
                 {errors.password && (
