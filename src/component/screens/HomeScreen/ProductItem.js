@@ -31,7 +31,6 @@ const ProductItem = props => {
   };
 
   const onPressLikeProduct = async id => {
-    console.log('product_ID', id);
     setLiked(!liked);
 
     if (!liked) {

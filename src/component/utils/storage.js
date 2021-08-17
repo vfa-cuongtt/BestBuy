@@ -37,7 +37,6 @@ export const setEmail = async value => {
 export const getEmail = async () => {
   try {
     const email = await AsyncStorage.getItem('@email');
-    // console.log('email', email);
     return email;
   } catch (err) {
     console.log(err);
@@ -47,7 +46,6 @@ export const getEmail = async () => {
 export const removeEmail = async () => {
   try {
     const email = await AsyncStorage.removeItem('@email');
-    // console.log('email', email);
     return email;
   } catch (err) {
     console.error(err);

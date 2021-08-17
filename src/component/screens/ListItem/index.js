@@ -18,9 +18,6 @@ import ListItemStyles from '../../style/ListItemStyles';
 
 const ListItem = props => {
   const {allItem} = props.route.params;
-  useEffect(() => {
-    console.log('ListItem', allItem);
-  }, [props]);
 
   const _renderAllProductItem = item => {
     return <ProductItem product={item} />;

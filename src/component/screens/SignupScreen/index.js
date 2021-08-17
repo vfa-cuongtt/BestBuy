@@ -25,8 +25,6 @@ const SignupScreen = ({navigation}) => {
     const data = {...value, gender: true, phone: '0910234567'};
     userSignup(data)
       .then(res => {
-        // console.log(res.data);
-
         return navigation.navigate('LoginScreen');
       })
       .catch(err => {

@@ -38,7 +38,6 @@ const productReducer = (state = {...initialState}, action) => {
         const productInBagIndex = state.orderProduct.findIndex(
           item => item.productId === action.payload.productId,
         );
-        console.log('productInBagIndex_', productInBagIndex);
         if (productInBagIndex >= 0) {
           state.orderProduct[productInBagIndex].quantity =
             state.orderProduct[productInBagIndex].quantity + 1;

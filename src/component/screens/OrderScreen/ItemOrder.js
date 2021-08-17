@@ -7,13 +7,11 @@ import AntIcon from 'react-native-vector-icons/AntDesign';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 const ItemOrder = props => {
-  // console.log('ItemOrder__', props.product);
   const {productId, name, image, price, quantity} = props.product;
   const [productQuantity, setProductQuantity] = useState(quantity);
   const [productPrice, setProductPrice] = useState(price);
 
   useEffect(() => {
-    // console.log('props.product', props.product);
     if (quantity > 1) {
       setProductPrice(price * 2);
     }

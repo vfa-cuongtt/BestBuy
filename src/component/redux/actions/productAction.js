@@ -122,10 +122,9 @@ export const fetchProductByCategory = id => {
 export const setProductLiked = id => {
   return async dispatch => {
     try {
-      // console.log('setProductLiked', id);
       let token = await getAccessToken();
       const result = await likeProduct(id, token);
-      console.log('setProductLiked', result.data);
+
       // fetchProductFavorite();
     } catch (error) {
       console.log('ERROR', error);
@@ -142,7 +141,6 @@ export const setUnlikeProduct = id => {
     try {
       let token = await getAccessToken();
       const result = await unlikeProduct(id, token);
-      console.log('setUnlikeProduct', result.data);
     } catch (error) {
       console.log('ERROR', error);
       dispatch({
@@ -156,10 +154,8 @@ export const setUnlikeProduct = id => {
 export const fetchProductFavorite = () => {
   return async dispatch => {
     try {
-      console.log('call fetchProductFavorite()');
       let token = await getAccessToken();
       const result = await getProductFavorite(token);
-      console.log('fetchProductFavorite__result', result.data.content);
       dispatch(getProductFavoriteSuccess(result.data.content));
     } catch (error) {
       console.log('ERROR', error);
@@ -175,11 +171,7 @@ export const fetchOtherProduct = orderArr => {
   return async dispatch => {
     try {
       let email = await getEmail();
-      console.log('orderArr', orderArr);
-
       const result = await orderProduct(orderArr, email);
-
-      console.log('fetchOtherProduct_result', result.data);
       if (result.data.statusCode === 200) {
         dispatch(clearItemInState());
       }
@@ -203,7 +195,6 @@ export const setProductToBag = product => {
         name: product.name,
         price: product.price,
       };
-      console.log('setProductToBag', order);
       dispatch(setProductOrder(order));
     } catch (error) {
       console.log('ERROR', error);
@@ -232,12 +223,10 @@ export const fetchProfile = () => {
 };
 
 export const resetPassword = pass => {
-  console.log('resetPassword', pass);
   return async dispatch => {
     try {
       let token = await getAccessToken();
       const result = await changePassword(pass, token);
-      console.log('resetPassword', result);
     } catch (error) {
       console.log('ERROR', error);
       dispatch({

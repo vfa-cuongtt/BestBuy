@@ -8,8 +8,6 @@ const CategoriesItem = props => {
   const dispatch = useDispatch();
 
   const onPressCategories = id => {
-    console.log('onPressCategories', id);
-    // dispatch(fetchProductByCategory(id));
     props.pressCallback(id);
   };
 

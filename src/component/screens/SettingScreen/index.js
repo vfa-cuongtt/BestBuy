@@ -34,10 +34,6 @@ const Setting = () => {
     dispatch(fetchProfile());
   }, []);
 
-  useEffect(() => {
-    console.log('userInfo', userInfo);
-  }, [userInfo]);
-
   const onPressLogout = () => {
     removeAccessToken();
     removeEmail();

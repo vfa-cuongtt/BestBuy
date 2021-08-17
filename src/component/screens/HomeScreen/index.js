@@ -72,7 +72,6 @@ const HomeScreen = () => {
       );
     });
 
-    console.log('Index_useEffect_tempArr', tempArr);
     setAllItem(_productListDataArr);
     setProductArr(tempArr);
     setIsDisplay(false);
@@ -91,7 +90,6 @@ const HomeScreen = () => {
       productFavoriteData.productsFavorite,
       tempArr,
     );
-    console.log('Index_onTabPress', tempArr);
     setProductArr(_productArr);
   };
 
@@ -111,7 +109,6 @@ const HomeScreen = () => {
     return <ProductIcon product={item} />;
   };
   const showAll = () => {
-    console.log('INDEX____ShowAll', allItem);
     navigation.navigate('ListItem', {allItem});
   };
   return (

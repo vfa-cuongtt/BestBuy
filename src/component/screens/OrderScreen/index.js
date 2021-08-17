@@ -39,8 +39,6 @@ const OrderScreen = () => {
   }, [navigation, productInBag, rerender]);
 
   const setTotalPrice = (price, id, productQuantity) => {
-    console.log('total price', id, price, productQuantity);
-
     itemInBag.forEach(item => {
       if (item.productId === id) {
         item.quantity = productQuantity;
@@ -49,7 +47,6 @@ const OrderScreen = () => {
 
     tempArr.push(price);
     // setPriceArr(price);
-    console.log('temp', tempArr);
 
     settotalPrice(price);
   };
@@ -74,7 +71,6 @@ const OrderScreen = () => {
   };
 
   const payProduct = () => {
-    // console.log('payProduct', itemInBag);
     dispatch(fetchOtherProduct(itemInBag));
     setItemInBag([]);
     setRerender(!rerender);
@@ -85,7 +81,6 @@ const OrderScreen = () => {
     setIsDisplay(!isDisplay);
   };
 
-  // console.log('Test Return', itemInBag);
   return (
     <SafeAreaView style={[GlobalStyles.areaView]}>
       <BackgroundView>

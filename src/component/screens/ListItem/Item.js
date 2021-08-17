@@ -25,22 +25,14 @@ const ProductItem = props => {
 
   const navigation = useNavigation();
 
-  useEffect(() => {
-    // console.log('ProductItem_props', props.product.item);
-  }, [props]);
-
   const onPressGetId = data => {
-    console.log('onPressGetId', data);
     navigation.navigate('DetailScreen', {data});
   };
 
   const onPressLikeProduct = async id => {
-    console.log('product_ID', id, isLiked);
     if (isLiked) {
-      console.log('unlike');
       await dispatch(setUnlikeProduct(id));
     } else {
-      console.log('like');
       await dispatch(setProductLiked(id));
     }
     dispatch(fetchProductFavorite());

@@ -32,17 +32,10 @@ const DetailScreen = props => {
   const [isDisplay, seIsDisplay] = useState(false);
   const navigation = useNavigation();
 
-  useEffect(() => {
-    console.log('DataDetail', data);
-  }, [props]);
-
   const onPressLikeProduct = async (id, islike) => {
-    console.log('product_ID', id, islike);
     if (islike) {
-      console.log('unlike');
       await dispatch(setUnlikeProduct(id));
     } else {
-      console.log('like');
       await dispatch(setProductLiked(id));
     }
     dispatch(fetchProductFavorite());

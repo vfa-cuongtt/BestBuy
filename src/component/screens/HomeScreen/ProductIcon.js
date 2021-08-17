@@ -16,14 +16,8 @@ const ProductIcon = props => {
   const navigation = useNavigation();
 
   const onPressCategories = data => {
-    console.log('onPressCategories', data);
-    // dispatch(fetchProductByCategory(id));
     navigation.navigate('DetailScreen', {data});
   };
-
-  useEffect(() => {
-    // console.log('ProductIcon_props', props.product);
-  }, [props]);
 
   return (
     <View style={ProductIconStyles.imgView}>
